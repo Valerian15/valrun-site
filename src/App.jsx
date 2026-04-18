@@ -701,18 +701,61 @@ function Mosaic() {
 
 export default function App() {
   const [active,setActive]=useState("home");
+  const [open,setOpen]=useState(false);
+
+  const go = (id) => { setActive(id); setOpen(false); };
+
+  const icons = {
+    home:"⌂",lore:"📜",geography:"◎",history:"⏳",peoples:"◉",
+    faith:"✦",factions:"⚔",language:"Ω",map:"◈",gallery:"▦",mosaic:"⟁"
+  };
+
   return (
     <div style={{minHeight:"100vh",background:C.bg,color:C.text,fontFamily:"Georgia,serif"}}>
-      <nav style={{position:"sticky",top:0,zIndex:100,background:`${C.bg}f0`,backdropFilter:"blur(12px)",borderBottom:`1px solid ${C.border}`,padding:"0 20px",display:"flex",alignItems:"center",overflowX:"auto"}}>
-        <div onClick={()=>setActive("home")} style={{color:C.gold,fontSize:14,letterSpacing:4,marginRight:28,padding:"14px 0",cursor:"pointer",whiteSpace:"nowrap"}}>VAL'RUN</div>
-        {NAV.filter(n=>n.id!=="home").map(item=>(
-          <button key={item.id} onClick={()=>setActive(item.id)} style={{background:"none",border:"none",borderBottom:active===item.id?`2px solid ${C.gold}`:"2px solid transparent",color:active===item.id?C.text:C.dim,padding:"14px 12px",cursor:"pointer",fontFamily:"Georgia,serif",fontSize:11,letterSpacing:1,whiteSpace:"nowrap"}}>
-            {item.l}
-          </button>
-        ))}
+
+      {/* Overlay */}
+      {open && (
+        <div onClick={()=>setOpen(false)} style={{position:"fixed",inset:0,background:"#00000080",zIndex:200,backdropFilter:"blur(2px)"}}/>
+      )}
+
+      {/* Drawer */}
+      <div style={{position:"fixed",top:0,left:0,height:"100vh",width:260,background:"#0b0b18",borderRight:`1px solid ${C.border}`,zIndex:300,transform:open?"translateX(0)":"translateX(-100%)",transition:"transform 0.3s cubic-bezier(.4,0,.2,1)",display:"flex",flexDirection:"column"}}>
+        {/* Drawer header */}
+        <div style={{padding:"28px 24px 20px",borderBottom:`1px solid ${C.border}`}}>
+          <div style={{color:C.gold,fontSize:18,letterSpacing:5}}>VAL'RUN</div>
+          <div style={{color:C.muted,fontSize:10,letterSpacing:2,marginTop:4}}>WORLD COMPENDIUM</div>
+        </div>
+        {/* Nav links */}
+        <div style={{flex:1,overflowY:"auto",padding:"12px 0"}}>
+          {NAV.map(item=>(
+            <div key={item.id} onClick={()=>go(item.id)} style={{display:"flex",alignItems:"center",gap:14,padding:"12px 24px",cursor:"pointer",background:active===item.id?`${C.gold}12`:"transparent",borderLeft:active===item.id?`3px solid ${C.gold}`:"3px solid transparent",transition:"all 0.15s"}}
+              onMouseEnter={e=>{if(active!==item.id){e.currentTarget.style.background=C.hover;}}}
+              onMouseLeave={e=>{if(active!==item.id){e.currentTarget.style.background="transparent";}}}>
+              <span style={{fontSize:14,width:20,textAlign:"center",color:active===item.id?C.gold:C.muted}}>{icons[item.id]}</span>
+              <span style={{color:active===item.id?C.text:C.dim,fontSize:13,letterSpacing:1}}>{item.l}</span>
+            </div>
+          ))}
+        </div>
+        {/* Drawer footer */}
+        <div style={{padding:"16px 24px",borderTop:`1px solid ${C.border}`}}>
+          <div style={{color:C.muted,fontSize:10,lineHeight:1.6}}>Present Year<br/><span style={{color:C.gold}}>1,147 AI · The Seventh Age</span></div>
+        </div>
+      </div>
+
+      {/* Top bar */}
+      <nav style={{position:"sticky",top:0,zIndex:100,background:`${C.bg}f0`,backdropFilter:"blur(12px)",borderBottom:`1px solid ${C.border}`,padding:"0 20px",display:"flex",alignItems:"center",gap:16,height:52}}>
+        <button onClick={()=>setOpen(!open)} style={{background:"none",border:`1px solid ${C.border}`,borderRadius:5,padding:"7px 10px",cursor:"pointer",display:"flex",flexDirection:"column",gap:4,color:C.text}}>
+          <span style={{display:"block",width:18,height:1.5,background:open?C.gold:C.dim,transition:"all 0.2s",transform:open?"rotate(45deg) translate(4px,4px)":"none"}}/>
+          <span style={{display:"block",width:18,height:1.5,background:open?C.gold:C.dim,transition:"all 0.2s",opacity:open?0:1}}/>
+          <span style={{display:"block",width:18,height:1.5,background:open?C.gold:C.dim,transition:"all 0.2s",transform:open?"rotate(-45deg) translate(4px,-4px)":"none"}}/>
+        </button>
+        <div onClick={()=>go("home")} style={{color:C.gold,fontSize:13,letterSpacing:4,cursor:"pointer"}}>VAL'RUN</div>
+        <div style={{flex:1}}/>
+        <div style={{color:C.muted,fontSize:10,letterSpacing:2}}>{NAV.find(n=>n.id===active)?.l.toUpperCase()}</div>
       </nav>
+
       <main>
-        {active==="home"&&<Home go={setActive}/>}
+        {active==="home"&&<Home go={go}/>}
         {active==="lore"&&<Lore/>}
         {active==="geography"&&<Geography/>}
         {active==="history"&&<History/>}
