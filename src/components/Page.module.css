@@ -1,0 +1,101 @@
+.page {
+  /* room for the lede to breathe */
+}
+
+.head {
+  margin-bottom: var(--space-12);
+  max-width: 720px;
+}
+
+.title {
+  margin-top: var(--space-2);
+}
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--vellum-dim);
+  margin-top: var(--space-4);
+}
+
+.body {
+  max-width: 720px;
+  font-size: 1.05rem;
+}
+
+/* ── sub-section within a page ─────────────────────── */
+.section {
+  margin-top: var(--space-12);
+}
+
+.section:first-child {
+  margin-top: 0;
+}
+
+.sectionTitle {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.8rem;
+  margin: var(--space-1) 0 var(--space-4);
+  color: var(--vellum);
+}
+
+/* ── named-entity list (factions, peoples) ─────────── */
+.namedList {
+  margin: var(--space-6) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.namedItem {
+  border-left: 2px solid var(--ink-line);
+  padding: 2px 0 2px var(--space-4);
+  transition: border-color 160ms ease;
+}
+
+.namedItem:hover {
+  border-left-color: var(--gold);
+}
+
+.namedTerm {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--gold);
+  margin: 0 0 2px;
+}
+
+.namedDesc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--vellum-dim);
+  line-height: 1.55;
+}
+
+/* ── empty-state card ──────────────────────────────── */
+.placeholder {
+  border: 1px solid var(--ink-line);
+  background: var(--ink-soft);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  color: var(--vellum-mute);
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.placeholderMark {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+  opacity: 0.7;
+}
+
+.placeholderText {
+  margin: 0;
+  font-size: 1.05rem;
+}
