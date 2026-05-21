@@ -40,8 +40,16 @@ export default function Layout() {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.appCta}
+            aria-label="Enter the tabletop (app.valrun.org)"
+            title="Enter the tabletop"
           >
-            Enter the tabletop
+            <img
+              src="/valrun-tree.png"
+              alt=""
+              className={styles.appCtaIcon}
+              width="36"
+              height="36"
+            />
           </a>
         </div>
       </header>

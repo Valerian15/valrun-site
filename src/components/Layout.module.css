@@ -86,23 +86,28 @@
 
 /* ── tabletop app CTA (top-right corner of header) ─── */
 .appCta {
-  font-family: var(--smcap);
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  padding: 4px 0;
   margin-left: var(--space-2);
+  padding: 2px;
   flex-shrink: 0;
-  white-space: nowrap;
-  transition: color 160ms ease, letter-spacing 200ms ease;
+  line-height: 0;
+  transition: transform 200ms ease, filter 200ms ease;
 }
 
 .appCta:hover {
-  color: var(--gold-hi);
   border: none;
-  letter-spacing: 0.22em;
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 8px rgba(181, 138, 58, 0.55));
+}
+
+.appCtaIcon {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 /* ── main ──────────────────────────────────────────── */
@@ -149,6 +154,9 @@
   .appCta {
     margin-left: 0;
     align-self: flex-start;
-    font-size: 0.72rem;
+  }
+  .appCtaIcon {
+    width: 32px;
+    height: 32px;
   }
 }
