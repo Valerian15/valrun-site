@@ -106,15 +106,6 @@ function Frontispiece() {
           A world that lives atop a wound — and a quiet doctrine that holds it together:
           <em> the breaking is necessary, and whoever forgets this will be answered.</em>
         </p>
-        <a
-          href="https://app.valrun.org"
-          className={styles.appCta}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span className={styles.appCtaLabel}>Enter the tabletop</span>
-          <span className={styles.appCtaSub}>app.valrun.org</span>
-        </a>
         <div className={styles.scrollCue} aria-hidden="true">
           <span>begin</span>
           <span className={styles.scrollArrow}>↓</span>
@@ -128,9 +119,11 @@ function Chapter({ img, eyebrow, title, body, to, cta, align }) {
   const [ref, inView] = useInView(0.3);
   const alignClass =
     align === "right" ? styles.alignRight : align === "center" ? styles.alignCenter : styles.alignLeft;
+  const vignetteClass =
+    align === "right" ? styles.vignetteRight : align === "center" ? styles.vignetteCenter : styles.vignetteLeft;
   return (
     <section ref={ref} className={styles.chapter} style={{ backgroundImage: `url(${img})` }}>
-      <div className={styles.vignette} />
+      <div className={`${styles.vignette} ${vignetteClass}`} />
       <div className={`${styles.chapterContent} ${alignClass} ${inView ? styles.visible : ""}`}>
         <div className={styles.romanWrap}>
           <span className={styles.roman}>{eyebrow}</span>

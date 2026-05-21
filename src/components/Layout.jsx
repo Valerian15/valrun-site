@@ -35,6 +35,14 @@ export default function Layout() {
               </NavLink>
             ))}
           </nav>
+          <a
+            href="https://app.valrun.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.appCta}
+          >
+            Enter the tabletop
+          </a>
         </div>
       </header>
 
