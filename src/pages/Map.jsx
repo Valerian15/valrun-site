@@ -1,4 +1,5 @@
 import { Page, Section, NamedList, Flourish } from "../components/Page.jsx";
+import styles from "./Map.module.css";
 
 const RATES = [
   { name: "Walker, maintained road",        desc: "~6 leagues / day" },
@@ -40,6 +41,15 @@ export default function MapPage() {
       title="Map"
       lede="Geography is the slowest power in Val'Run, and the one that decides every war."
     >
+      <figure className={styles.mapFigure}>
+        <a href="/map.jpg" target="_blank" rel="noreferrer" className={styles.mapLink}>
+          <img src="/map.jpg" alt="Map of Val'Run" className={styles.mapImage} loading="lazy" />
+        </a>
+        <figcaption className={styles.mapCaption}>
+          The continent of Val'Run, the Serene Sea, and the Gyre of the Deep. Click to view full size.
+        </figcaption>
+      </figure>
+
       <Section eyebrow="i." title="Scale and Speed">
         <p>
           The atlas is built on a working scale of approximately five kilometres to the

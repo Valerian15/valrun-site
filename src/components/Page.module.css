@@ -1,5 +1,5 @@
 .page {
-  /* room for the lede to breathe */
+  padding: var(--space-16) 0 var(--space-24);
 }
 
 .head {

@@ -1,0 +1,33 @@
+.mapFigure {
+  margin: 0 0 var(--space-12);
+  border: 1px solid var(--ink-line);
+  background: var(--ink-soft);
+  padding: var(--space-3);
+  position: relative;
+}
+
+.mapLink {
+  display: block;
+  border: none;
+  line-height: 0;
+  cursor: zoom-in;
+}
+
+.mapLink:hover { border: none; }
+
+.mapImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: saturate(0.92) contrast(1.04);
+}
+
+.mapCaption {
+  font-family: var(--smcap);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--vellum-mute);
+  text-align: center;
+  margin-top: var(--space-3);
+}

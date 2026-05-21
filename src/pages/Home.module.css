@@ -1,89 +1,388 @@
+/* ──────────────────────────────────────────────────────────────
+   Val'Run — cinematic homepage
+   Long parallax scroll. Full-bleed images, fade-in passages.
+   ────────────────────────────────────────────────────────────── */
+
 .home {
-  /* page-level wrapper */
+  /* container for all the panels */
 }
 
-/* ── hero ──────────────────────────────────────────── */
-.hero {
+/* shared eyebrow used by both frontispiece and coda */
+.eyebrow {
+  font-family: var(--smcap);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  color: var(--vellum-mute);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+/* ── panel base (frontispiece + chapters share this) ── */
+.frontispiece,
+.chapter {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* ── frontispiece (opening panel) ───────────────────── */
+.frontispiece {
+  justify-content: center;
+}
+
+.vignetteFrontispiece {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 0%, rgba(10, 12, 18, 0.55) 55%, rgba(10, 12, 18, 0.95) 100%),
+    linear-gradient(to bottom, rgba(14, 16, 20, 0.55) 0%, rgba(14, 16, 20, 0) 30%, rgba(14, 16, 20, 0) 65%, rgba(14, 16, 20, 0.85) 100%);
+  pointer-events: none;
+}
+
+.frontContent {
+  position: relative;
+  z-index: 1;
   text-align: center;
-  padding-top: var(--space-12);
-  padding-bottom: var(--space-16);
   max-width: 760px;
+  padding: 0 var(--space-6);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1600ms ease, transform 1600ms ease;
 }
 
-.title {
+.frontContent.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.frontTitle {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(3.5rem, 10vw, 6rem);
+  font-size: clamp(4rem, 12vw, 8rem);
   line-height: 1;
-  margin: var(--space-3) 0 var(--space-4);
-  letter-spacing: 0.01em;
+  letter-spacing: 0.015em;
   color: var(--vellum);
+  margin: var(--space-3) 0 var(--space-3);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
 }
 
-.lede {
+.frontRule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+  color: var(--gold);
+  margin: var(--space-4) auto var(--space-6);
+  width: 60%;
+  max-width: 280px;
+}
+.frontRule::before,
+.frontRule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.7;
+}
+
+.frontLede {
   font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.3rem;
-  color: var(--vellum-dim);
-  max-width: 580px;
-  margin: 0 auto;
+  font-style: normal;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
   line-height: 1.55;
-}
-
-/* ── card grid ─────────────────────────────────────── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1px;
-  background: var(--ink-line);
-  border: 1px solid var(--ink-line);
-}
-
-.card {
-  position: relative;
-  background: var(--ink);
-  padding: var(--space-8) var(--space-6);
   color: var(--vellum);
-  border: none;
+  max-width: 600px;
+  margin: 0 auto;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7);
+}
+
+.frontLede em {
+  color: var(--vellum-dim);
+  font-style: italic;
+}
+
+/* ── tabletop app CTA ──────────────────────────────── */
+.appCta {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: var(--space-8);
+  padding: var(--space-3) var(--space-8);
+  border: 1px solid var(--gold);
+  background: rgba(14, 16, 20, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--vellum);
+  text-decoration: none;
+  font-family: var(--smcap);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease, letter-spacing 220ms ease, transform 220ms ease;
+  cursor: pointer;
+}
+
+.appCta:hover {
+  background: rgba(181, 138, 58, 0.18);
+  border-color: var(--gold-hi);
+  color: var(--gold-hi);
+  letter-spacing: 0.24em;
+  transform: translateY(-1px);
+}
+
+.appCtaLabel {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.appCtaSub {
+  font-family: var(--smcap);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--vellum-mute);
+  text-transform: lowercase;
+}
+
+.scrollCue {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-2);
-  min-height: 160px;
-  transition: background 160ms ease;
+  margin-top: var(--space-12);
+  color: var(--vellum-mute);
+  font-family: var(--smcap);
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  animation: floatDown 2.6s ease-in-out infinite;
 }
 
-.card:hover {
-  background: var(--ink-soft);
-  color: var(--vellum);
-  border: none;
+.scrollArrow {
+  font-size: 1.2rem;
+  opacity: 0.7;
 }
 
-.card:hover .cardTitle { color: var(--gold); }
-.card:hover .cardMark  { color: var(--gold-hi); transform: translateX(4px); }
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
 
-.cardTitle {
+/* ── chapter panels ─────────────────────────────────── */
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 5%, rgba(0, 0, 0, 0.45) 70%, rgba(0, 0, 0, 0.75) 100%),
+    linear-gradient(to bottom, rgba(14, 16, 20, 0.35) 0%, rgba(14, 16, 20, 0) 25%, rgba(14, 16, 20, 0) 75%, rgba(14, 16, 20, 0.7) 100%);
+  pointer-events: none;
+}
+
+.chapterContent {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  padding: var(--space-8) var(--space-8);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1400ms ease, transform 1400ms ease;
+}
+
+.chapterContent.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.alignLeft   { margin: 0 auto 0 8%; text-align: left; }
+.alignRight  { margin: 0 8% 0 auto; text-align: right; }
+.alignCenter { margin: 0 auto; text-align: center; }
+
+.romanWrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  color: var(--gold);
+  font-family: var(--serif);
+  font-style: italic;
+}
+
+.alignLeft .romanWrap::after,
+.alignCenter .romanWrap::after,
+.alignRight .romanWrap::before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold));
+  max-width: 80px;
+  opacity: 0.65;
+}
+.alignRight .romanWrap::before {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+
+.alignRight .romanWrap { justify-content: flex-end; }
+.alignCenter .romanWrap { justify-content: center; }
+
+.roman {
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+}
+
+.chapterTitle {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: 1.5rem;
-  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.015em;
   color: var(--vellum);
+  margin: 0 0 var(--space-5);
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.75);
+}
+
+.chapterBody {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--vellum);
+  margin: 0 0 var(--space-6);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
+}
+
+.chapterLink {
+  font-family: var(--smcap);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 160ms ease, border-color 160ms ease, letter-spacing 200ms ease;
+}
+
+.chapterLink:hover {
+  color: var(--gold-hi);
+  border-bottom-color: var(--gold-hi);
+  letter-spacing: 0.24em;
+}
+
+/* ── coda (outro index) ─────────────────────────────── */
+
+.coda {
+  position: relative;
+  background: var(--ink);
+  padding: var(--space-24) 0;
+  text-align: center;
+  /* hairline gold rule above */
+  border-top: 1px solid rgba(181, 138, 58, 0.25);
+}
+
+.codaContent {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1200ms ease, transform 1200ms ease;
+}
+
+.codaContent.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.codaTitle {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--vellum);
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+.codaRule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+  color: var(--gold);
+  margin: var(--space-4) auto var(--space-12);
+  width: 50%;
+  max-width: 240px;
+}
+.codaRule::before,
+.codaRule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.65;
+}
+
+.codaList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4) var(--space-8);
+}
+
+.codaLink {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  color: var(--vellum-dim);
+  border: none;
   transition: color 160ms ease;
 }
 
-.cardBlurb {
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  color: var(--vellum-dim);
-  margin: 0;
-  line-height: 1.5;
-  font-weight: 300;
+.codaLink:hover {
+  color: var(--gold);
+  border: none;
 }
 
-.cardMark {
-  position: absolute;
-  right: var(--space-6);
-  bottom: var(--space-6);
-  color: var(--vellum-mute);
-  font-size: 1rem;
-  transition: transform 160ms ease, color 160ms ease;
+/* ── small screens ─────────────────────────────────── */
+@media (max-width: 760px) {
+  .chapterContent {
+    max-width: 100%;
+    padding: var(--space-6);
+  }
+  .alignLeft   { margin: 0 auto; text-align: center; }
+  .alignRight  { margin: 0 auto; text-align: center; }
+  .alignCenter { margin: 0 auto; text-align: center; }
+
+  .alignLeft .romanWrap,
+  .alignRight .romanWrap,
+  .alignCenter .romanWrap {
+    justify-content: center;
+  }
+
+  .alignLeft .romanWrap::after,
+  .alignRight .romanWrap::before,
+  .alignCenter .romanWrap::after {
+    max-width: 50px;
+  }
+
+  .codaList {
+    gap: var(--space-3) var(--space-6);
+  }
+  .codaLink {
+    font-size: 1.2rem;
+  }
+}
+
+/* respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .frontContent, .chapterContent, .codaContent {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+  .scrollCue { animation: none; }
 }

@@ -2,7 +2,6 @@ import { NavLink, Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
 
 const NAV = [
-  { to: "/",           label: "Home" },
   { to: "/lore",       label: "Lore" },
   { to: "/geography",  label: "Geography" },
   { to: "/history",    label: "History" },
@@ -28,7 +27,6 @@ export default function Layout() {
               <NavLink
                 key={item.to}
                 to={item.to}
-                end={item.to === "/"}
                 className={({ isActive }) =>
                   `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
                 }
