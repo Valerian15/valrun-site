@@ -4,7 +4,7 @@ export default function Lore() {
   return (
     <Page
       variant="cinematic"
-      bodyStyle="sticky"
+      bodyStyle="panels"
       heroImage="/hero/03-aetherflow.jpg"
       eyebrow="Chapter I"
       title="The Lore"

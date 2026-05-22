@@ -19,7 +19,7 @@ export default function Peoples() {
   return (
     <Page
       variant="cinematic"
-      bodyStyle="grid"
+      bodyStyle="panels"
       heroImage="/hero/05-peoples.jpg"
       eyebrow="Chapter IV"
       title="The Peoples"

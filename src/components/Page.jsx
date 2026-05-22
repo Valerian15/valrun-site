@@ -108,21 +108,7 @@ function CinematicHero({ eyebrow, title, lede, heroImage }) {
 }
 
 function CinematicBody({ bodyStyle, heroImage, children }) {
-  /* sticky atmosphere — chapter art stays as a darkened fixed backdrop */
-  if (bodyStyle === "sticky") {
-    return (
-      <div className={styles.stickyWrap}>
-        <div
-          className={styles.stickyBg}
-          style={{ backgroundImage: `url(${heroImage})` }}
-          aria-hidden="true"
-        />
-        <div className={styles.stickyOverlay} aria-hidden="true" />
-        <div className={`container ${styles.stickyBody}`}>{children}</div>
-      </div>
-    );
-  }
-  /* panels — each Section becomes a full-viewport panel */
+  /* panels — each Section becomes a full-viewport panel; NamedLists become cards */
   if (bodyStyle === "panels") {
     return (
       <div
@@ -133,13 +119,9 @@ function CinematicBody({ bodyStyle, heroImage, children }) {
       </div>
     );
   }
-  /* editorial — asymmetric typography, no body imagery */
-  if (bodyStyle === "editorial") {
-    return <div className={`container ${styles.bodyEditorial}`}>{children}</div>;
-  }
-  /* grid — magazine grid for named lists, drop-cap on first p */
-  if (bodyStyle === "grid") {
-    return <div className={`container ${styles.bodyGrid}`}>{children}</div>;
+  /* timeline — vertical spine, era cards alternating left/right (History) */
+  if (bodyStyle === "timeline") {
+    return <div className={styles.bodyTimeline}>{children}</div>;
   }
   /* default cinematic body — clean centered column */
   return <div className={`container ${styles.cinematicBody}`}>{children}</div>;

@@ -4,7 +4,7 @@ export default function History() {
   return (
     <Page
       variant="cinematic"
-      bodyStyle="editorial"
+      bodyStyle="timeline"
       heroImage="/hero/02-the-breaking.jpg"
       eyebrow="Chapter III"
       title="The History"
