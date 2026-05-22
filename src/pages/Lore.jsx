@@ -3,8 +3,10 @@ import { Page, Section, Flourish } from "../components/Page.jsx";
 export default function Lore() {
   return (
     <Page
+      variant="cinematic"
+      heroImage="/hero/03-aetherflow.jpg"
       eyebrow="Chapter I"
-      title="Lore"
+      title="The Lore"
       lede="Before the first day there was no day; before the first breath there was no breath. From the unbroken dark, a question."
     >
       <Section eyebrow="i." title="The Architect and the Breath">

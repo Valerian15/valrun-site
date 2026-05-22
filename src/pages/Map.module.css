@@ -1,9 +1,12 @@
 .mapFigure {
   margin: 0 0 var(--space-12);
-  border: 1px solid var(--ink-line);
-  background: var(--ink-soft);
+  border: 1px solid rgba(80, 50, 20, 0.35);
+  background: rgba(80, 50, 20, 0.05);
   padding: var(--space-3);
   position: relative;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.15),
+    0 0 0 4px rgba(80, 50, 20, 0.05);
 }
 
 .mapLink {
@@ -19,15 +22,14 @@
   width: 100%;
   height: auto;
   display: block;
-  filter: saturate(0.92) contrast(1.04);
 }
 
 .mapCaption {
   font-family: var(--smcap);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--vellum-mute);
+  color: #7a5728;
   text-align: center;
   margin-top: var(--space-3);
 }

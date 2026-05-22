@@ -48,8 +48,9 @@ const ORDERS = [
 export default function Factions() {
   return (
     <Page
-      eyebrow="Chapter VI"
-      title="Factions"
+      variant="folio"
+      eyebrow="The Sixth Folio · Of the Powers"
+      title="The Web Without a Throne"
       lede="Twelve hundred years after the Empire fell, Val'Run is governed not by a throne but by a web."
     >
       <p>

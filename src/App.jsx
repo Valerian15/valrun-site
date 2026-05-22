@@ -7,7 +7,6 @@ import History from "./pages/History.jsx";
 import Peoples from "./pages/Peoples.jsx";
 import Faith from "./pages/Faith.jsx";
 import Factions from "./pages/Factions.jsx";
-import Language from "./pages/Language.jsx";
 import MapPage from "./pages/Map.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import NotFound from "./pages/NotFound.jsx";
@@ -23,7 +22,6 @@ export default function App() {
         <Route path="/peoples" element={<Peoples />} />
         <Route path="/faith" element={<Faith />} />
         <Route path="/factions" element={<Factions />} />
-        <Route path="/language" element={<Language />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="*" element={<NotFound />} />

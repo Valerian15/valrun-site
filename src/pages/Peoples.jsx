@@ -18,8 +18,10 @@ const PEOPLES = [
 export default function Peoples() {
   return (
     <Page
+      variant="cinematic"
+      heroImage="/hero/05-peoples.jpg"
       eyebrow="Chapter IV"
-      title="Peoples"
+      title="The Peoples"
       lede="Eleven peoples share Val'Run — six remembered in scripture, five who watch from the edges of recorded history."
     >
       <Section eyebrow="i." title="The Six Classic Races">

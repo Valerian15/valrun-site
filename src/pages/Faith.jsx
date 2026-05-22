@@ -24,8 +24,9 @@ const TEMPLES = [
 export default function Faith() {
   return (
     <Page
-      eyebrow="Chapter V"
-      title="Faith"
+      variant="folio"
+      eyebrow="The Fifth Folio · Of the Faith"
+      title="Of Eonar &amp; the Nine"
       lede="Three faiths, one scripture, and a silence at the heart of all three."
     >
       <Section eyebrow="i." title="Eonarism and the Nine">

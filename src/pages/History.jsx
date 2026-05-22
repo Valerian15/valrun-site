@@ -3,8 +3,10 @@ import { Page, Section } from "../components/Page.jsx";
 export default function History() {
   return (
     <Page
+      variant="cinematic"
+      heroImage="/hero/02-the-breaking.jpg"
       eyebrow="Chapter III"
-      title="History"
+      title="The History"
       lede="All time in Val'Run is reckoned from a single moment of fire."
     >
       <p>

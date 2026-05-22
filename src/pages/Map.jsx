@@ -37,8 +37,9 @@ const UNITS = [
 export default function MapPage() {
   return (
     <Page
-      eyebrow="Plate I"
-      title="Map"
+      variant="folio"
+      eyebrow="The Atlas · Plate I"
+      title="The Continent Drawn"
       lede="Geography is the slowest power in Val'Run, and the one that decides every war."
     >
       <figure className={styles.mapFigure}>

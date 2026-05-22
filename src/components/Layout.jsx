@@ -8,7 +8,6 @@ const NAV = [
   { to: "/peoples",    label: "Peoples" },
   { to: "/faith",      label: "Faith" },
   { to: "/factions",   label: "Factions" },
-  { to: "/language",   label: "Language" },
   { to: "/map",        label: "Map" },
   { to: "/gallery",    label: "Gallery" },
 ];

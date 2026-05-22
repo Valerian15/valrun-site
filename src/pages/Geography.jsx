@@ -3,8 +3,10 @@ import { Page, Section, Flourish } from "../components/Page.jsx";
 export default function Geography() {
   return (
     <Page
+      variant="cinematic"
+      heroImage="/hero/04-continent.jpg"
       eyebrow="Chapter II"
-      title="Geography"
+      title="The Geography"
       lede="A continent of four faces, drawn together — and slowly torn apart — by a single sea."
     >
       <Section eyebrow="north" title="Verdure">
