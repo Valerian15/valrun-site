@@ -1,0 +1,174 @@
+/* ──────────────────────────────────────────────────────────────
+   Variant I — Bestiary scroll
+   Single column. One chapter image fixed faintly behind everything.
+   Each entry: huge serif italic name with a drop-cap initial, long
+   body text below, gold-diamond ornament between entries.
+   ────────────────────────────────────────────────────────────── */
+
+.bestiary {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px) saturate(0.85) brightness(0.35);
+  transform: scale(1.05);
+  z-index: -2;
+  pointer-events: none;
+}
+
+.bgOverlay {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(14, 16, 20, 0.55) 0%, rgba(14, 16, 20, 0.85) 100%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.scroll {
+  position: relative;
+  z-index: 0;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-6) var(--space-24);
+}
+
+/* ── header ────────────────────────────────────────── */
+.head {
+  text-align: center;
+  margin-bottom: var(--space-24);
+}
+
+.eyebrow {
+  font-family: var(--smcap);
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(3rem, 7vw, 4.6rem);
+  line-height: 1.05;
+  color: var(--vellum);
+  margin: var(--space-2) 0;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+.rule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+  color: var(--gold);
+  margin: var(--space-5) auto var(--space-6);
+  width: 60%;
+  max-width: 280px;
+}
+.rule::before, .rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.7;
+}
+
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.55;
+  color: var(--vellum-dim);
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* ── entries ───────────────────────────────────────── */
+.entries {
+  /* container */
+}
+
+.entry {
+  margin: 0;
+  padding: 0;
+}
+
+.entry + .entry {
+  margin-top: var(--space-16);
+}
+
+.entryName {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(2.4rem, 5vw, 3.2rem);
+  line-height: 1;
+  color: var(--vellum);
+  margin: 0 0 var(--space-6);
+  display: flex;
+  align-items: baseline;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.initial {
+  font-family: var(--serif);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.7em;
+  line-height: 0.85;
+  color: var(--gold);
+  margin-right: 0.04em;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.rest {
+  /* the rest of the name flows */
+}
+
+.entryDesc {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  color: var(--vellum);
+  margin: 0;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
+
+/* ornamental rule between entries */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  justify-content: center;
+  color: var(--gold);
+  margin: var(--space-16) auto 0;
+  width: 40%;
+  max-width: 220px;
+}
+.divider::before, .divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(181, 138, 58, 0.55), transparent);
+}
+.divider span {
+  font-size: 0.85rem;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+@media (max-width: 720px) {
+  .scroll { padding: var(--space-16) var(--space-5) var(--space-20); }
+  .entry + .entry { margin-top: var(--space-12); }
+}

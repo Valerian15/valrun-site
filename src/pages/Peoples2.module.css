@@ -1,0 +1,241 @@
+/* ──────────────────────────────────────────────────────────────
+   Variant II — Showcase carousel
+   Horizontal scroll-snap. Each entry is its own full-viewport
+   "window" with the chapter image behind. Arrow keys + dot nav.
+   ────────────────────────────────────────────────────────────── */
+
+.carouselWrap {
+  position: relative;
+  height: calc(100vh - 0px);
+  /* leave room for the global header */
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.4) saturate(0.92);
+  transform: scale(1.05);
+  z-index: -2;
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 70%, rgba(0, 0, 0, 0.85) 100%),
+    linear-gradient(to bottom, rgba(14, 16, 20, 0.4) 0%, rgba(14, 16, 20, 0.1) 30%, rgba(14, 16, 20, 0.1) 70%, rgba(14, 16, 20, 0.85) 100%);
+  z-index: -1;
+}
+
+.track {
+  height: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.track::-webkit-scrollbar { display: none; }
+
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-12) clamp(var(--space-6), 8vw, var(--space-24));
+  position: relative;
+}
+
+/* ── intro slide ───────────────────────────────────── */
+.eyebrow {
+  font-family: var(--smcap);
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(3.4rem, 9vw, 6rem);
+  line-height: 1;
+  color: var(--vellum);
+  margin: var(--space-2) 0 var(--space-3);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85);
+}
+
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--vellum);
+  max-width: 620px;
+  margin: 0 auto;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+.scrollCue {
+  margin-top: var(--space-12);
+  font-family: var(--smcap);
+  font-size: 0.78rem;
+  letter-spacing: 0.25em;
+  color: var(--vellum-mute);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  animation: pulseRight 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseRight {
+  0%, 100% { transform: translateX(0); opacity: 0.75; }
+  50%      { transform: translateX(6px); opacity: 1; }
+}
+
+/* ── per-people slide ──────────────────────────────── */
+.slideNumber {
+  font-family: var(--smcap);
+  font-size: 0.85rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
+}
+
+.slideNumber span {
+  color: var(--vellum-mute);
+}
+
+.slideName {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(3.8rem, 11vw, 7rem);
+  line-height: 1;
+  color: var(--vellum);
+  margin: 0 0 var(--space-2);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.95);
+  letter-spacing: 0.01em;
+}
+
+.slideDesc {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  line-height: 1.55;
+  color: var(--vellum);
+  max-width: 640px;
+  margin: 0 auto;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+}
+
+/* shared rule */
+.rule {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  justify-content: center;
+  color: var(--gold);
+  margin: var(--space-5) auto var(--space-6);
+  width: 60%;
+  max-width: 280px;
+}
+.rule::before, .rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.7;
+}
+
+/* ── arrow nav ─────────────────────────────────────── */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(181, 138, 58, 0.4);
+  background: rgba(14, 16, 20, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--gold);
+  font-family: var(--serif);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.arrow:hover {
+  background: rgba(14, 16, 20, 0.8);
+  border-color: var(--gold);
+  color: var(--gold-hi);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.arrowPrev { left: var(--space-6); }
+.arrowNext { right: var(--space-6); }
+
+/* ── dot nav ──────────────────────────────────────── */
+.dots {
+  position: absolute;
+  bottom: var(--space-12);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  padding: var(--space-2) var(--space-4);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(181, 138, 58, 0.5);
+  background: transparent;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease, border-color 160ms ease;
+  padding: 0;
+}
+
+.dot:hover { border-color: var(--gold); }
+
+.dotActive {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.4);
+}
+
+@media (max-width: 720px) {
+  .arrow { width: 40px; height: 40px; font-size: 1.4rem; }
+  .arrowPrev { left: var(--space-3); }
+  .arrowNext { right: var(--space-3); }
+}
