@@ -23,6 +23,12 @@ export function NamedList({ items }) {
           <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
           <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
           <dt className={styles.namedTerm}>{item.name}</dt>
+          <div className={styles.namedRule} aria-hidden="true">
+            <span>◆</span>
+          </div>
+          <div className={styles.namedPlate} aria-hidden="true">
+            <span className={styles.namedPlateMark}>{item.name.charAt(0)}</span>
+          </div>
           <dd className={styles.namedDesc}>{item.desc}</dd>
         </div>
       ))}
