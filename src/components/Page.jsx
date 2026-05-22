@@ -18,6 +18,10 @@ export function NamedList({ items }) {
     <dl className={styles.namedList}>
       {items.map((item) => (
         <div key={item.name} className={styles.namedItem}>
+          <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
+          <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
+          <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
+          <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
           <dt className={styles.namedTerm}>{item.name}</dt>
           <dd className={styles.namedDesc}>{item.desc}</dd>
         </div>

@@ -1,3 +1,4 @@
+/* Shared canonical list of the Peoples of Val'Run. */
 export const PEOPLES = [
   { name: "Humans",   desc: "Dominant in Verdure (with dwarves) and Sarudar (with orcs). The weakest natural magic of any sentient race — a limitation that drove Verdure's technological compensation." },
   { name: "Elves",    desc: "Long-lived bloodline mages of Twiland (500–700 years). Their final century, the Dimming, is a rapid decline that shapes their politics of urgency." },
@@ -11,11 +12,4 @@ export const PEOPLES = [
   { name: "Thalvari", desc: "Amphibious humanoids of the deep Serene Sea. Bioluminescent markings unique to each individual. Their largest known settlement, Corathel, is lost somewhere beyond the Gyre." },
   { name: "Pethryn",  desc: "Living petrified wood. Born when the Aetheric Anchor's first activation petrified the forest around 200 BI. Chemical root communication — a message across the Petrified Forest takes a full day." },
   { name: "Sketh",    desc: "Bipedal lizard-folk of Sarudar. Memory-keepers who imprint thought directly into stone. Guard the Zelkaris ruins, waiting for someone they have not yet seen." },
-];
-
-export const VARIANTS = [
-  { to: "/peoples",   label: "Current" },
-  { to: "/peoples/1", label: "I · Bestiary" },
-  { to: "/peoples/2", label: "II · Carousel" },
-  { to: "/peoples/3", label: "III · Tarot" },
 ];

@@ -1,10 +1,8 @@
 import { Page, Section, NamedList, Flourish } from "../components/Page.jsx";
-import VariantSwitch from "../components/VariantSwitch.jsx";
-import { PEOPLES, VARIANTS } from "../data/peoples.js";
+import { PEOPLES } from "../data/peoples.js";
 
 export default function Peoples() {
   return (
-    <>
     <Page
       variant="cinematic"
       bodyStyle="panels"
@@ -68,7 +66,5 @@ export default function Peoples() {
         <NamedList items={PEOPLES} />
       </Section>
     </Page>
-    <VariantSwitch variants={VARIANTS} label="Peoples · style" />
-    </>
   );
 }
