@@ -1,43 +1,102 @@
 /* ──────────────────────────────────────────────────────────────
-   History · Variant II — Stratified strata
-   Horizontal bands stacked vertically. Older = dimmer, dustier.
-   Newer = brighter. Click to expand the body of any stratum.
+   History · Variant II — Map-as-timeline
+   Left half of the screen is the ValRun map (sticky), zooming
+   and panning to wherever the current Age happened. Right half
+   is the scrolling era-by-era body. A pulsing pin marks the
+   current focal point on the map.
    ────────────────────────────────────────────────────────────── */
 
-.strataPage {
+.mapPage {
   position: relative;
   isolation: isolate;
   min-height: 100vh;
-  overflow: hidden;
-  padding: var(--space-16) var(--space-6) var(--space-24);
 }
 
-.bg {
+/* ── sticky map stage (left half) ──────────────────── */
+.stage {
   position: fixed;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0;
+  background: #0a0c10;
+  border-right: 1px solid rgba(181, 138, 58, 0.18);
+}
+
+.mapImage {
+  position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: brightness(0.32) saturate(0.85) blur(2px);
-  transform: scale(1.05);
-  z-index: -2;
+  transition: transform 1100ms cubic-bezier(0.4, 0, 0.2, 1);
+  filter: saturate(0.96) contrast(1.04);
 }
 
-.bgOverlay {
-  position: fixed;
+.stageOverlay {
+  position: absolute;
   inset: 0;
+  pointer-events: none;
   background:
-    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.65) 75%, rgba(0, 0, 0, 0.9) 100%),
-    linear-gradient(to bottom, rgba(14, 16, 20, 0.55) 0%, rgba(14, 16, 20, 0.9) 100%);
-  z-index: -1;
+    radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 80%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(to right, rgba(14, 16, 20, 0.05) 0%, transparent 30%, transparent 70%, rgba(14, 16, 20, 0.45) 100%);
 }
 
-/* ── head ──────────────────────────────────────────── */
-.head {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto var(--space-16);
+/* pulsing focal pin */
+.pin {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transition: left 1100ms cubic-bezier(0.4, 0, 0.2, 1),
+              top 1100ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.pinDot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(14, 16, 20, 0.85), 0 0 18px rgba(181, 138, 58, 0.8);
+  z-index: 2;
+}
+
+.pinRing {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  margin: -14px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: pinPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pinPulse {
+  0%   { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ── scrolling body (right half) ───────────────────── */
+.scrollArea {
   position: relative;
   z-index: 1;
+  margin-left: 55%;
+  padding: var(--space-16) var(--space-8) var(--space-24);
+  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.4) 0%, rgba(14, 16, 20, 0.7) 100%);
+  min-height: 100vh;
+}
+
+.head {
+  margin: 0 auto var(--space-16);
+  max-width: 540px;
 }
 
 .eyebrow {
@@ -49,27 +108,24 @@
   margin-bottom: var(--space-3);
 }
 
-.pageTitle {
+.title {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(3rem, 7vw, 4.6rem);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
   line-height: 1.05;
   color: var(--vellum);
   margin: var(--space-2) 0;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
 }
 
-.rule {
+.headRule {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  justify-content: center;
   color: var(--gold);
-  margin: var(--space-5) auto var(--space-5);
-  width: 60%;
-  max-width: 280px;
+  margin: var(--space-4) 0 var(--space-5);
+  max-width: 240px;
 }
-.rule::before, .rule::after {
+.headRule::before, .headRule::after {
   content: "";
   flex: 1;
   height: 1px;
@@ -80,167 +136,127 @@
 .lede {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   line-height: 1.55;
   color: var(--vellum);
-  max-width: 580px;
-  margin: 0 auto var(--space-4);
+  margin: 0 0 var(--space-3);
 }
 
 .hint {
   font-family: var(--sans);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--vellum-mute);
-  max-width: 540px;
-  margin: 0 auto;
   font-style: italic;
 }
 
-/* ── strata stack ──────────────────────────────────── */
-.strata {
-  max-width: 880px;
+/* ── era cards in the scroll column ────────────────── */
+.eras {
+  max-width: 540px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 1px; /* hairline between strata */
+  gap: var(--space-12);
 }
 
-.stratum {
-  position: relative;
-  border: 1px solid rgba(181, 138, 58, 0.18);
-  border-bottom: none;
-  background: rgba(14, 16, 20, 0.78);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: background 220ms ease, border-color 220ms ease;
-  overflow: hidden;
+.era {
+  padding: var(--space-7) var(--space-7) var(--space-6);
+  background: rgba(14, 16, 20, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(181, 138, 58, 0.22);
+  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
 }
 
-.stratum:last-child {
-  border-bottom: 1px solid rgba(181, 138, 58, 0.18);
+.era:hover {
+  border-color: rgba(181, 138, 58, 0.5);
+  background: rgba(14, 16, 20, 0.92);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* older buried at top — fade older strata back */
-.stratum[data-age="1"] { opacity: 0.52; filter: saturate(0.8); }
-.stratum[data-age="2"] { opacity: 0.62; filter: saturate(0.85); }
-.stratum[data-age="3"] { opacity: 0.72; filter: saturate(0.9); }
-.stratum[data-age="4"] { opacity: 0.82; filter: saturate(0.95); }
-.stratum[data-age="5"] { opacity: 0.9; }
-.stratum[data-age="6"] { opacity: 0.96; }
-.stratum[data-age="7"] { opacity: 1; }
-
-.stratum:hover,
-.stratum.open {
-  opacity: 1;
-  filter: none;
-  background: rgba(20, 22, 30, 0.88);
-  border-color: rgba(181, 138, 58, 0.45);
-}
-
-/* the header (clickable) */
-.head2 {
-  width: 100%;
-  background: none;
-  border: none;
-  cursor: pointer;
+.eraHead {
   display: grid;
-  grid-template-columns: 80px 1fr 28px;
-  align-items: center;
-  gap: var(--space-5);
-  padding: var(--space-5) var(--space-7);
-  text-align: left;
-  font-family: inherit;
-  color: inherit;
-  transition: background 200ms ease;
-}
-
-.head2:hover {
-  background: rgba(255, 255, 255, 0.04);
+  grid-template-columns: 56px 1fr;
+  align-items: start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
 }
 
 .roman {
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: 2rem;
+  font-size: 2.4rem;
   color: var(--gold);
-  text-align: center;
-  border-right: 1px solid rgba(181, 138, 58, 0.3);
-  padding-right: var(--space-5);
   line-height: 1;
+  text-align: center;
+  padding-top: 6px;
 }
 
-.label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.eraHeadText {
+  /* container */
 }
 
-.stratumTitle {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-style: italic;
-  font-size: 1.4rem;
-  color: var(--vellum);
-  line-height: 1.1;
-}
-
-.stratumEra {
+.era_label {
   font-family: var(--smcap);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   letter-spacing: 0.18em;
   color: var(--vellum-mute);
   text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
-.toggle {
+.eraTitle {
   font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 300;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.55rem;
+  line-height: 1.1;
+  color: var(--vellum);
+  margin: 0 0 var(--space-2);
+}
+
+.locus {
+  font-family: var(--smcap);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   color: var(--gold);
-  line-height: 1;
-  text-align: center;
-  transition: transform 200ms ease;
+  text-transform: uppercase;
+  opacity: 0.85;
 }
 
-.open .toggle { transform: rotate(180deg); }
-
-/* expanded body */
-.stratumBody {
-  padding: 0 var(--space-7) var(--space-7);
+.body {
   font-family: var(--serif);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   line-height: 1.7;
   color: var(--vellum);
-  border-top: 1px solid rgba(181, 138, 58, 0.18);
-  padding-top: var(--space-5);
-  margin: 0 var(--space-5);
-  animation: stratumIn 360ms ease;
 }
 
-.stratumBody p { margin: 0 0 var(--space-3); }
-.stratumBody p:last-child { margin-bottom: 0; }
+.body p { margin: 0 0 var(--space-3); }
+.body p:last-child { margin-bottom: 0; }
 
-.stratumBody strong {
+.body strong {
   color: var(--gold);
   font-weight: 500;
 }
 
-@keyframes stratumIn {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* ── narrow screens: map collapses above content ───── */
+@media (max-width: 900px) {
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    border-right: none;
+    border-bottom: 1px solid rgba(181, 138, 58, 0.18);
+  }
+  .scrollArea {
+    margin-left: 0;
+    padding: var(--space-12) var(--space-5) var(--space-20);
+  }
+  .eras { max-width: 680px; }
 }
 
-/* ── narrow screens ────────────────────────────────── */
-@media (max-width: 600px) {
-  .head2 {
-    grid-template-columns: 56px 1fr 24px;
-    gap: var(--space-3);
-    padding: var(--space-4) var(--space-5);
-  }
-  .roman { font-size: 1.6rem; padding-right: var(--space-3); }
-  .stratumTitle { font-size: 1.2rem; }
-  .stratumBody { padding: var(--space-4) var(--space-5) var(--space-5); margin: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .mapImage { transition: none; }
+  .pin { transition: none; }
+  .pinRing { animation: none; }
 }

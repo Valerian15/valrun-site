@@ -148,7 +148,6 @@ export const HISTORY_INTRO =
 
 export const HISTORY_VARIANTS = [
   { to: "/history",   label: "Current" },
-  { to: "/history/1", label: "I · Era scenes" },
-  { to: "/history/2", label: "II · Strata" },
-  { to: "/history/3", label: "III · Annals" },
+  { to: "/history/1", label: "I · Time-river" },
+  { to: "/history/2", label: "II · Map-timeline" },
 ];
