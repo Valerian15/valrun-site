@@ -231,6 +231,368 @@
   font-size: 1.05rem;
 }
 
+.sectionBody {
+  /* hook for body-style overrides */
+}
+
+/* ─────────────────────────────────────────────────────
+   STICKY ATMOSPHERE  (Lore)
+   The hero image stays as a fixed, darkened backdrop
+   behind the body. Reading happens inside the image.
+   ───────────────────────────────────────────────────── */
+.stickyWrap {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.stickyBg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  filter: blur(2px) saturate(0.85) brightness(0.32);
+  transform: scale(1.05);
+}
+
+.stickyOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(14, 16, 20, 0.55) 0%, rgba(14, 16, 20, 0.85) 100%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.stickyBody {
+  position: relative;
+  z-index: 0;
+  max-width: 760px;
+  padding: var(--space-16) var(--space-6) var(--space-24);
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+.stickyBody .section {
+  margin-top: var(--space-16);
+  position: relative;
+}
+
+.stickyBody .section:first-child {
+  margin-top: 0;
+}
+
+.stickyBody .section:nth-child(odd) {
+  margin-left: 0;
+  margin-right: 8%;
+}
+.stickyBody .section:nth-child(even) {
+  margin-left: 8%;
+  margin-right: 0;
+}
+
+.stickyBody .sectionTitle {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  color: var(--vellum);
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: var(--space-5);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.stickyBody :global(.eyebrow) {
+  color: var(--gold);
+  margin-bottom: var(--space-2);
+}
+
+.stickyBody p {
+  color: var(--vellum);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* drop-cap on first paragraph of first section */
+.stickyBody .section:first-child .sectionBody > p:first-child::first-letter,
+.stickyBody > p:first-child::first-letter {
+  font-family: var(--serif);
+  font-weight: 600;
+  float: left;
+  font-size: 4em;
+  line-height: 0.85;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--gold);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
+/* ─────────────────────────────────────────────────────
+   PANELS  (Geography)
+   Every Section becomes a full-viewport panel with the
+   chapter art behind, panning slightly between panels.
+   ───────────────────────────────────────────────────── */
+.bodyPanels {
+  --panel-bg: none;
+}
+
+.bodyPanels .section {
+  position: relative;
+  min-height: 100vh;
+  margin: 0;
+  padding: var(--space-16) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: var(--panel-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* slight bg-position pan per panel, gives a camera-pan feel */
+.bodyPanels .section:nth-child(1) { background-position: 25% 40%; }
+.bodyPanels .section:nth-child(2) { background-position: 75% 40%; }
+.bodyPanels .section:nth-child(3) { background-position: 50% 20%; }
+.bodyPanels .section:nth-child(4) { background-position: 50% 80%; }
+.bodyPanels .section:nth-child(5) { background-position: 15% 60%; }
+.bodyPanels .section:nth-child(6) { background-position: 85% 60%; }
+
+/* dark vignette overlay on each panel */
+.bodyPanels .section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.65) 70%, rgba(0, 0, 0, 0.85) 100%),
+    linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.2) 30%, rgba(14, 16, 20, 0.2) 70%, rgba(14, 16, 20, 0.6) 100%);
+  pointer-events: none;
+}
+
+.bodyPanels .section > * {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.bodyPanels .section :global(.eyebrow) {
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
+  margin-bottom: var(--space-4);
+}
+
+.bodyPanels .sectionTitle {
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 500;
+  color: var(--vellum);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95), 0 6px 32px rgba(0, 0, 0, 0.85);
+  margin-bottom: var(--space-6);
+}
+
+.bodyPanels .sectionBody {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+  line-height: 1.6;
+  color: var(--vellum);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95), 0 3px 18px rgba(0, 0, 0, 0.85);
+}
+
+.bodyPanels .sectionBody p {
+  margin: 0 0 var(--space-3);
+}
+
+/* ─────────────────────────────────────────────────────
+   EDITORIAL  (History)
+   Asymmetric typography. Big numbered gutter markers.
+   No body imagery — pure type.
+   ───────────────────────────────────────────────────── */
+.bodyEditorial {
+  max-width: 920px;
+  padding: var(--space-16) var(--space-6) var(--space-24);
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--vellum);
+}
+
+.bodyEditorial > p {
+  max-width: 680px;
+  margin: 0 auto var(--space-6);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--vellum-dim);
+}
+
+.bodyEditorial .section {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  column-gap: var(--space-8);
+  margin-top: var(--space-16);
+  align-items: start;
+}
+
+.bodyEditorial .section:first-child {
+  margin-top: var(--space-8);
+}
+
+.bodyEditorial .section :global(.eyebrow) {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gold);
+  text-align: right;
+  margin: 0;
+  padding-top: 8px;
+  border-right: 1px solid rgba(181, 138, 58, 0.3);
+  padding-right: var(--space-4);
+  align-self: stretch;
+}
+
+.bodyEditorial .sectionTitle {
+  grid-column: 2;
+  grid-row: 1;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: clamp(2rem, 3.6vw, 2.8rem);
+  color: var(--vellum);
+  margin: 0 0 var(--space-4);
+  line-height: 1.1;
+}
+
+.bodyEditorial .sectionBody {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 640px;
+}
+
+/* drop-cap on the FIRST paragraph of the FIRST section */
+.bodyEditorial .section:first-of-type .sectionBody > p:first-child::first-letter {
+  font-family: var(--serif);
+  font-weight: 600;
+  float: left;
+  font-size: 4.2em;
+  line-height: 0.85;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--gold);
+}
+
+/* small screens: collapse the gutter */
+@media (max-width: 720px) {
+  .bodyEditorial .section {
+    grid-template-columns: 1fr;
+  }
+  .bodyEditorial .section :global(.eyebrow) {
+    grid-column: 1;
+    grid-row: auto;
+    text-align: left;
+    border-right: none;
+    border-bottom: 1px solid rgba(181, 138, 58, 0.3);
+    padding-right: 0;
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-3);
+  }
+  .bodyEditorial .sectionTitle,
+  .bodyEditorial .sectionBody {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+/* ─────────────────────────────────────────────────────
+   MAGAZINE GRID  (Peoples)
+   Drop-cap, named lists become a 2-col card grid.
+   Generous whitespace. Bordered cards on hover lift.
+   ───────────────────────────────────────────────────── */
+.bodyGrid {
+  max-width: 1040px;
+  padding: var(--space-16) var(--space-6) var(--space-24);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.bodyGrid .section {
+  margin-top: var(--space-16);
+}
+
+.bodyGrid .section:first-child {
+  margin-top: 0;
+}
+
+.bodyGrid .sectionTitle {
+  font-size: clamp(2rem, 3.6vw, 2.6rem);
+  font-weight: 500;
+  font-style: italic;
+  color: var(--vellum);
+  margin-bottom: var(--space-6);
+  text-align: center;
+}
+
+.bodyGrid :global(.eyebrow) {
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+
+.bodyGrid .sectionBody {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* drop-cap on first paragraph of the first section's body */
+.bodyGrid .section:first-child .sectionBody > p:first-child::first-letter {
+  font-family: var(--serif);
+  font-weight: 600;
+  float: left;
+  font-size: 4em;
+  line-height: 0.85;
+  padding: 0.05em 0.12em 0 0;
+  color: var(--gold);
+}
+
+/* NamedList becomes a card grid in this variant */
+.bodyGrid .namedList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+  max-width: none;
+  margin: var(--space-8) 0;
+}
+
+.bodyGrid .namedItem {
+  border: 1px solid var(--ink-line);
+  background: rgba(22, 25, 34, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: var(--space-5);
+  transition: border-color 200ms ease, transform 200ms ease, background 200ms ease;
+}
+
+.bodyGrid .namedItem:hover {
+  border-color: var(--gold);
+  border-left-color: var(--gold);
+  transform: translateY(-3px);
+  background: rgba(22, 25, 34, 0.78);
+}
+
+.bodyGrid .namedTerm {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-2);
+}
+
+.bodyGrid .namedDesc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
 /* ─────────────────────────────────────────────────────
    FOLIO VARIANT — manuscript / parchment
    ───────────────────────────────────────────────────── */

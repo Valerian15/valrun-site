@@ -4,6 +4,7 @@ export default function Geography() {
   return (
     <Page
       variant="cinematic"
+      bodyStyle="panels"
       heroImage="/hero/04-continent.jpg"
       eyebrow="Chapter II"
       title="The Geography"

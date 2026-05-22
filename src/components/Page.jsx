@@ -8,7 +8,7 @@ export function Section({ eyebrow, title, children }) {
     <section className={styles.section}>
       {eyebrow && <div className="eyebrow">{eyebrow}</div>}
       {title && <h2 className={styles.sectionTitle}>{title}</h2>}
-      <div>{children}</div>
+      <div className={styles.sectionBody}>{children}</div>
     </section>
   );
 }
@@ -80,32 +80,78 @@ function DefaultPage({ eyebrow, title, lede, children }) {
   );
 }
 
-/* ── cinematic variant ─────────────────────────────── */
+/* ── cinematic variants ────────────────────────────── */
 
-function CinematicPage({ eyebrow, title, lede, heroImage, children }) {
+function CinematicHero({ eyebrow, title, lede, heroImage }) {
   const [ref, inView] = useInView(0.1);
   return (
-    <article className={styles.cinematicPage}>
-      <section
-        ref={ref}
-        className={styles.cinematicHero}
-        style={{ backgroundImage: `url(${heroImage})` }}
+    <section
+      ref={ref}
+      className={styles.cinematicHero}
+      style={{ backgroundImage: `url(${heroImage})` }}
+    >
+      <div className={styles.cinematicVignette} />
+      <div className={`${styles.cinematicContent} ${inView ? styles.visible : ""}`}>
+        {eyebrow && <div className={styles.cinematicEyebrow}>{eyebrow}</div>}
+        <h1 className={styles.cinematicTitle}>{title}</h1>
+        <div className={styles.cinematicRule} aria-hidden="true">
+          <span>◆</span>
+        </div>
+        {lede && <p className={styles.cinematicLede}>{lede}</p>}
+      </div>
+      <div className={styles.cinematicScrollCue} aria-hidden="true">
+        <span>read on</span>
+        <span>↓</span>
+      </div>
+    </section>
+  );
+}
+
+function CinematicBody({ bodyStyle, heroImage, children }) {
+  /* sticky atmosphere — chapter art stays as a darkened fixed backdrop */
+  if (bodyStyle === "sticky") {
+    return (
+      <div className={styles.stickyWrap}>
+        <div
+          className={styles.stickyBg}
+          style={{ backgroundImage: `url(${heroImage})` }}
+          aria-hidden="true"
+        />
+        <div className={styles.stickyOverlay} aria-hidden="true" />
+        <div className={`container ${styles.stickyBody}`}>{children}</div>
+      </div>
+    );
+  }
+  /* panels — each Section becomes a full-viewport panel */
+  if (bodyStyle === "panels") {
+    return (
+      <div
+        className={styles.bodyPanels}
+        style={{ "--panel-bg": `url(${heroImage})` }}
       >
-        <div className={styles.cinematicVignette} />
-        <div className={`${styles.cinematicContent} ${inView ? styles.visible : ""}`}>
-          {eyebrow && <div className={styles.cinematicEyebrow}>{eyebrow}</div>}
-          <h1 className={styles.cinematicTitle}>{title}</h1>
-          <div className={styles.cinematicRule} aria-hidden="true">
-            <span>◆</span>
-          </div>
-          {lede && <p className={styles.cinematicLede}>{lede}</p>}
-        </div>
-        <div className={styles.cinematicScrollCue} aria-hidden="true">
-          <span>read on</span>
-          <span>↓</span>
-        </div>
-      </section>
-      <div className={`container ${styles.cinematicBody}`}>{children}</div>
+        {children}
+      </div>
+    );
+  }
+  /* editorial — asymmetric typography, no body imagery */
+  if (bodyStyle === "editorial") {
+    return <div className={`container ${styles.bodyEditorial}`}>{children}</div>;
+  }
+  /* grid — magazine grid for named lists, drop-cap on first p */
+  if (bodyStyle === "grid") {
+    return <div className={`container ${styles.bodyGrid}`}>{children}</div>;
+  }
+  /* default cinematic body — clean centered column */
+  return <div className={`container ${styles.cinematicBody}`}>{children}</div>;
+}
+
+function CinematicPage({ eyebrow, title, lede, heroImage, bodyStyle, children }) {
+  return (
+    <article className={styles.cinematicPage}>
+      <CinematicHero eyebrow={eyebrow} title={title} lede={lede} heroImage={heroImage} />
+      <CinematicBody bodyStyle={bodyStyle} heroImage={heroImage}>
+        {children}
+      </CinematicBody>
     </article>
   );
 }
@@ -134,9 +180,9 @@ function FolioPage({ eyebrow, title, lede, children }) {
 
 /* ── public Page API ───────────────────────────────── */
 
-export function Page({ variant, heroImage, ...props }) {
+export function Page({ variant, heroImage, bodyStyle, ...props }) {
   if (variant === "cinematic" && heroImage) {
-    return <CinematicPage heroImage={heroImage} {...props} />;
+    return <CinematicPage heroImage={heroImage} bodyStyle={bodyStyle} {...props} />;
   }
   if (variant === "folio") {
     return <FolioPage {...props} />;
