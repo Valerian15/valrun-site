@@ -3,12 +3,14 @@ import styles from "./Geography.module.css";
 
 const MAP = "/map.jpg";
 
-/* Curated places, sourced from /02_ATLAS/valrun_map_control_points_v1.csv
+/* Curated places, sourced from /02_ATLAS/valrun_map_control_points_v1.csv.
  * x, y are percentages of the map image; scale is the map zoom level
- * (1.0 = full map, ~2.5 = a single named location).             */
+ * (1.0 = full map, ~2.5 = a single named location).
+ * region: the region label that appears as the eyebrow on the card.   */
 const PLACES = [
   {
     name: "The Continent of Val'Run",
+    region: "The World",
     label: "the world entire",
     x: 50, y: 50, scale: 1.05,
     body: (
@@ -19,7 +21,7 @@ const PLACES = [
           apart by the inland <strong>Serene Sea</strong>.
         </p>
         <p>
-          Scroll on. The map will follow.
+          Click any place below to travel to it, or just scroll. The map will follow.
         </p>
       </>
     ),
@@ -28,6 +30,7 @@ const PLACES = [
   /* ── Verdure ─────────────────────────────────────── */
   {
     name: "Verdure",
+    region: "Verdure",
     label: "the temperate north",
     x: 40, y: 18, scale: 1.5,
     body: (
@@ -40,6 +43,7 @@ const PLACES = [
   },
   {
     name: "The Frostcrown Ridges",
+    region: "Verdure",
     label: "mountains of the north",
     x: 10, y: 4, scale: 2.0,
     body: (
@@ -52,6 +56,7 @@ const PLACES = [
   },
   {
     name: "Durumbar",
+    region: "Verdure",
     label: "the dwarven stronghold",
     x: 6, y: 9, scale: 2.6,
     body: (
@@ -64,6 +69,7 @@ const PLACES = [
   },
   {
     name: "Grimgar",
+    region: "Verdure",
     label: "the modernizing dwarves",
     x: 10, y: 16, scale: 2.6,
     body: (
@@ -75,6 +81,7 @@ const PLACES = [
   },
   {
     name: "Everpeak",
+    region: "Verdure",
     label: "the city of the Council of Five",
     x: 18, y: 24, scale: 2.6,
     body: (
@@ -88,6 +95,7 @@ const PLACES = [
   },
   {
     name: "Saltwood Hold",
+    region: "Verdure",
     label: "the southwest naval gate",
     x: 4, y: 40, scale: 2.6,
     body: (
@@ -99,6 +107,7 @@ const PLACES = [
   },
   {
     name: "Bastion's Reach",
+    region: "Verdure",
     label: "the northern naval gate",
     x: 78, y: 10, scale: 2.6,
     body: (
@@ -111,6 +120,7 @@ const PLACES = [
   },
   {
     name: "Timbercross",
+    region: "Verdure",
     label: "the forest-and-artisan capital",
     x: 28, y: 15, scale: 2.6,
     body: (
@@ -123,6 +133,7 @@ const PLACES = [
   },
   {
     name: "The Rupture",
+    region: "Verdure",
     label: "the wound of the world",
     x: 58, y: 6, scale: 2.4,
     body: (
@@ -135,6 +146,7 @@ const PLACES = [
   },
   {
     name: "Riftward",
+    region: "Verdure",
     label: "the scholar's town",
     x: 55, y: 19, scale: 2.6,
     body: (
@@ -149,6 +161,7 @@ const PLACES = [
   /* ── Twiland ─────────────────────────────────────── */
   {
     name: "Twiland",
+    region: "Twiland",
     label: "the enchanted south-west",
     x: 22, y: 88, scale: 1.5,
     body: (
@@ -161,6 +174,7 @@ const PLACES = [
   },
   {
     name: "The World Tree Forest",
+    region: "Twiland",
     label: "the bioluminescent heart",
     x: 4, y: 98, scale: 2.4,
     body: (
@@ -173,6 +187,7 @@ const PLACES = [
   },
   {
     name: "Luneberg",
+    region: "Twiland",
     label: "the elven seat",
     x: 10, y: 93, scale: 2.6,
     body: (
@@ -184,6 +199,7 @@ const PLACES = [
   },
   {
     name: "Nilvelond",
+    region: "Twiland",
     label: "Twiland's western port",
     x: 2, y: 72, scale: 2.6,
     body: (
@@ -195,6 +211,7 @@ const PLACES = [
   },
   {
     name: "Lylenore",
+    region: "Twiland",
     label: "the eastern port",
     x: 58, y: 92, scale: 2.6,
     body: (
@@ -208,6 +225,7 @@ const PLACES = [
   /* ── Sarudar ─────────────────────────────────────── */
   {
     name: "Sarudar",
+    region: "Sarudar",
     label: "the desert east",
     x: 90, y: 70, scale: 1.5,
     body: (
@@ -220,6 +238,7 @@ const PLACES = [
   },
   {
     name: "Gadh'aran",
+    region: "Sarudar",
     label: "the desert hub",
     x: 90, y: 64, scale: 2.6,
     body: (
@@ -232,6 +251,7 @@ const PLACES = [
   },
   {
     name: "Brabrar",
+    region: "Sarudar",
     label: "the trade gate",
     x: 84, y: 58, scale: 2.6,
     body: (
@@ -244,6 +264,7 @@ const PLACES = [
   },
   {
     name: "The Tomb of Time",
+    region: "Sarudar",
     label: "Zelkaris observatory",
     x: 85, y: 83, scale: 2.6,
     body: (
@@ -256,6 +277,7 @@ const PLACES = [
   },
   {
     name: "The Endless Pit",
+    region: "Sarudar",
     label: "the shaft to nowhere",
     x: 96, y: 64, scale: 2.6,
     body: (
@@ -268,6 +290,7 @@ const PLACES = [
   },
   {
     name: "The Petrified Forest",
+    region: "Sarudar",
     label: "trees of stone",
     x: 94, y: 77, scale: 2.4,
     body: (
@@ -282,6 +305,7 @@ const PLACES = [
   /* ── Cinder Island ───────────────────────────────── */
   {
     name: "Cinder Island",
+    region: "Cinder Island",
     label: "the volcanic south",
     x: 35, y: 67, scale: 1.7,
     body: (
@@ -294,6 +318,7 @@ const PLACES = [
   },
   {
     name: "The Obsidian Throne",
+    region: "Cinder Island",
     label: "the active volcano",
     x: 34, y: 60, scale: 2.8,
     body: (
@@ -306,6 +331,7 @@ const PLACES = [
   },
   {
     name: "The Black Bastion",
+    region: "Cinder Island",
     label: "fortress of the last Zelkaris",
     x: 39, y: 72, scale: 2.8,
     body: (
@@ -321,6 +347,7 @@ const PLACES = [
   /* ── Serene Sea ──────────────────────────────────── */
   {
     name: "The Gyre of the Deep",
+    region: "Serene Sea",
     label: "the widening whirlpool",
     x: 70, y: 39, scale: 2.4,
     body: (
@@ -334,6 +361,7 @@ const PLACES = [
   },
   {
     name: "Driftwood Haven",
+    region: "Serene Sea",
     label: "the pirates' island",
     x: 49, y: 45, scale: 2.6,
     body: (
@@ -345,29 +373,51 @@ const PLACES = [
   },
 ];
 
-function Place({ place, index, onActive }) {
+function Place({ place, index, isActive, onActivate }) {
   const ref = useRef(null);
+
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    /* the "active zone" is a thin band 28%–58% from the top of the
+       viewport — when a card's top crosses into that band, it becomes
+       the current focus. This matches where you'd actually be reading. */
     const obs = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting && e.intersectionRatio > 0.45) {
-          onActive(index);
-        }
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) onActivate(index, { fromScroll: true });
+        });
       },
-      { threshold: [0.45, 0.6, 0.8] },
+      { rootMargin: "-28% 0px -42% 0px", threshold: 0 },
     );
     obs.observe(node);
     return () => obs.disconnect();
-  }, [index, onActive]);
+  }, [index, onActivate]);
+
+  const handleClick = () => {
+    onActivate(index, { fromScroll: false });
+    ref.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
 
   return (
-    <article ref={ref} className={styles.place}>
-      <div className={styles.placeHead}>
-        <div className={styles.placeLabel}>{place.label}</div>
-        <h2 className={styles.placeName}>{place.name}</h2>
-      </div>
+    <article
+      ref={ref}
+      className={`${styles.place} ${isActive ? styles.active : ""}`}
+      onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleClick();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-current={isActive ? "true" : undefined}
+      aria-label={`${place.name} — ${place.region}`}
+    >
+      <div className={styles.placeRegion}>{place.region}</div>
+      <h2 className={styles.placeName}>{place.name}</h2>
+      {place.label && <div className={styles.placeLabel}>{place.label}</div>}
       <div className={styles.placeBody}>{place.body}</div>
     </article>
   );
@@ -409,7 +459,7 @@ export default function Geography() {
             inland sea.
           </p>
           <div className={styles.hint}>
-            Scroll through Val'Run — the map will travel with you, point to point.
+            Scroll or click a place — the map will travel with you.
           </div>
         </header>
 
@@ -419,7 +469,8 @@ export default function Geography() {
               key={place.name}
               place={place}
               index={i}
-              onActive={setActiveIndex}
+              isActive={i === activeIndex}
+              onActivate={setActiveIndex}
             />
           ))}
         </div>

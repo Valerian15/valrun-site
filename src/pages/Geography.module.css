@@ -1,8 +1,8 @@
 /* ──────────────────────────────────────────────────────────────
    The Geography — map-as-explorer
-   Left half: sticky map that zooms/pans to each named place.
-   Right half: scrolling place-by-place column. IntersectionObserver
-   on each place updates the map's focal point.
+   Left: sticky map that zooms/pans to each named place.
+   Right: scrolling place column. Clicking a card OR scrolling
+   it into the upper "reading band" activates it.
    ────────────────────────────────────────────────────────────── */
 
 .mapPage {
@@ -91,7 +91,7 @@
   z-index: 1;
   margin-left: 55%;
   padding: var(--space-16) var(--space-8) var(--space-24);
-  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.4) 0%, rgba(14, 16, 20, 0.7) 100%);
+  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.75) 100%);
   min-height: 100vh;
 }
 
@@ -134,52 +134,111 @@
   font-style: italic;
 }
 
-/* ── place cards in the scroll column ─────────────── */
+/* ── place cards ───────────────────────────────────── */
 .places {
   max-width: 540px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-10);
+  gap: var(--space-8);
 }
 
 .place {
-  padding: var(--space-7) var(--space-7) var(--space-6);
-  background: rgba(14, 16, 20, 0.8);
+  position: relative;
+  padding: var(--space-8) var(--space-8) var(--space-7);
+  background: rgba(14, 16, 20, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(181, 138, 58, 0.22);
-  transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  border: 1px solid rgba(181, 138, 58, 0.18);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition:
+    border-color 260ms ease,
+    background 260ms ease,
+    box-shadow 260ms ease,
+    transform 260ms ease;
+}
+
+/* a faint vertical gold rule on the inactive cards' left edge —
+   gives a sense the cards are entries on a list */
+.place::before {
+  content: "";
+  position: absolute;
+  top: var(--space-8);
+  bottom: var(--space-7);
+  left: 0;
+  width: 2px;
+  background: rgba(181, 138, 58, 0.22);
+  transition: background 260ms ease, top 260ms ease, bottom 260ms ease;
 }
 
 .place:hover {
-  border-color: rgba(181, 138, 58, 0.5);
-  background: rgba(14, 16, 20, 0.92);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(181, 138, 58, 0.45);
+  background: rgba(20, 22, 30, 0.85);
 }
 
-.placeHead {
-  margin-bottom: var(--space-4);
+.place:hover::before {
+  background: rgba(181, 138, 58, 0.55);
 }
 
-.placeLabel {
+.place:focus-visible {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(181, 138, 58, 0.3);
+}
+
+/* ── ACTIVE state — when this is the current map focus ── */
+.place.active {
+  border-color: var(--gold);
+  background: rgba(28, 30, 40, 0.92);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(181, 138, 58, 0.3),
+    0 0 28px rgba(181, 138, 58, 0.1);
+  transform: translateX(-4px);
+}
+
+.place.active::before {
+  background: var(--gold);
+  top: 0;
+  bottom: 0;
+  width: 3px;
+}
+
+/* ── card content ──────────────────────────────────── */
+.placeRegion {
   font-family: var(--smcap);
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
   color: var(--gold);
   text-transform: uppercase;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
   opacity: 0.85;
+  transition: opacity 260ms ease;
+}
+
+.place.active .placeRegion {
+  opacity: 1;
 }
 
 .placeName {
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: 1.7rem;
+  font-size: 1.75rem;
   line-height: 1.1;
   color: var(--vellum);
   margin: 0;
+  letter-spacing: 0.005em;
+}
+
+.placeLabel {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--vellum-dim);
+  margin: var(--space-1) 0 var(--space-5);
+  letter-spacing: 0.01em;
 }
 
 .placeBody {
@@ -211,10 +270,13 @@
     padding: var(--space-12) var(--space-5) var(--space-20);
   }
   .places { max-width: 680px; }
+  .place { padding: var(--space-7) var(--space-6) var(--space-6); }
+  .placeName { font-size: 1.55rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mapImage { transition: none; }
   .pin { transition: none; }
   .pinRing { animation: none; }
+  .place { transition: none; }
 }
