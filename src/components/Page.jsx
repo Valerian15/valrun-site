@@ -13,23 +13,12 @@ export function Section({ eyebrow, title, children }) {
   );
 }
 
-export function NamedList({ items, eyebrow }) {
+export function NamedList({ items }) {
   return (
     <dl className={styles.namedList}>
       {items.map((item) => (
         <div key={item.name} className={styles.namedItem}>
-          <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
-          <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
-          <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
-          <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
-          {eyebrow && <div className={styles.namedItemEyebrow}>{eyebrow}</div>}
           <dt className={styles.namedTerm}>{item.name}</dt>
-          <div className={styles.namedRule} aria-hidden="true">
-            <span>◆</span>
-          </div>
-          <div className={styles.namedPlate} aria-hidden="true">
-            <span className={styles.namedPlateMark}>{item.name.charAt(0)}</span>
-          </div>
           <dd className={styles.namedDesc}>{item.desc}</dd>
         </div>
       ))}
