@@ -130,7 +130,7 @@
 .cardFace {
   position: absolute;
   inset: 0;
-  padding: var(--space-10) var(--space-5) var(--space-5);
+  padding: var(--space-10) var(--space-7) var(--space-7);
   background:
     radial-gradient(ellipse at top, rgba(60, 50, 35, 0.42) 0%, transparent 65%),
     linear-gradient(180deg, rgba(36, 32, 28, 0.92) 0%, rgba(14, 16, 20, 0.95) 75%);
@@ -247,7 +247,7 @@
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: var(--gold);
   margin: 0;
   letter-spacing: 0.01em;
@@ -257,8 +257,8 @@
 .cardDesc {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--vellum);
   margin: var(--space-2) 0 0;
   max-width: 100%;
