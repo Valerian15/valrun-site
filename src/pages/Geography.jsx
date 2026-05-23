@@ -359,18 +359,6 @@ const PLACES = [
       </p>
     ),
   },
-  {
-    name: "Driftwood Haven",
-    region: "Serene Sea",
-    label: "the pirates' island",
-    x: 49, y: 45, scale: 2.6,
-    body: (
-      <p>
-        Hidden island base of <strong>Captain Dargan Kelvar</strong>'s Crimson Tide — twelve
-        ships, eight hundred crew. Sits dead-center on every trade route warped by the Gyre.
-      </p>
-    ),
-  },
 ];
 
 function Place({ place, index, isActive, onActivate }) {
