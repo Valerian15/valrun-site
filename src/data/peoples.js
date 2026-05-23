@@ -1,4 +1,8 @@
-/* Shared canonical list of the Peoples of Val'Run. */
+/* Shared canonical list of the Peoples of Val'Run.
+ * To add a portrait to a kindred's plate, drop the image into
+ * /public/peoples/ (e.g. /public/peoples/humans.jpg) and add
+ * `image: "/peoples/humans.jpg"` to the entry below. If absent,
+ * the plate falls back to the initial letter in gold serif. */
 export const PEOPLES = [
   { name: "Humans",   desc: "Dominant in Verdure (with dwarves) and Sarudar (with orcs). The weakest natural magic of any sentient race — a limitation that drove Verdure's technological compensation." },
   { name: "Elves",    desc: "Long-lived bloodline mages of Twiland (500–700 years). Their final century, the Dimming, is a rapid decline that shapes their politics of urgency." },

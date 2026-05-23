@@ -32,7 +32,11 @@ export default function Peoples() {
               <span>◆</span>
             </div>
             <div className={styles.plate} aria-hidden="true">
-              <span className={styles.plateMark}>{p.name.charAt(0)}</span>
+              {p.image ? (
+                <img src={p.image} alt="" className={styles.plateImage} />
+              ) : (
+                <span className={styles.plateMark}>{p.name.charAt(0)}</span>
+              )}
             </div>
             <p className={styles.cardDesc}>{p.desc}</p>
           </article>
