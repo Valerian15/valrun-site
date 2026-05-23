@@ -63,7 +63,7 @@ export default function Peoples() {
       </Section>
 
       <Section eyebrow="iv." title="Quick Reference">
-        <NamedList items={PEOPLES} />
+        <NamedList items={PEOPLES} eyebrow="The Kindred" />
       </Section>
     </Page>
   );
