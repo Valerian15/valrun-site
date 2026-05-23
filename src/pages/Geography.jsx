@@ -429,24 +429,29 @@ export default function Geography() {
 
   return (
     <div className={styles.mapPage}>
-      {/* sticky map stage on the left */}
+      {/* sticky map stage on the left.
+          The .canvas wrapper has the map's exact 4:3 aspect ratio so
+          x/y % from the atlas CSV align 1:1 with where they should
+          land on the rendered map. */}
       <div className={styles.stage} aria-hidden="true">
-        <div
-          className={styles.mapImage}
-          style={{
-            backgroundImage: `url(${MAP})`,
-            transform: `scale(${focus.scale})`,
-            transformOrigin: `${focus.x}% ${focus.y}%`,
-          }}
-        />
-        <div className={styles.stageOverlay} />
-        <div
-          className={styles.pin}
-          style={{ left: `${focus.x}%`, top: `${focus.y}%` }}
-        >
-          <span className={styles.pinDot} />
-          <span className={styles.pinRing} />
+        <div className={styles.canvas}>
+          <div
+            className={styles.mapImage}
+            style={{
+              backgroundImage: `url(${MAP})`,
+              transform: `scale(${focus.scale})`,
+              transformOrigin: `${focus.x}% ${focus.y}%`,
+            }}
+          />
+          <div
+            className={styles.pin}
+            style={{ left: `${focus.x}%`, top: `${focus.y}%` }}
+          >
+            <span className={styles.pinDot} />
+            <span className={styles.pinRing} />
+          </div>
         </div>
+        <div className={styles.stageOverlay} />
       </div>
 
       {/* scrolling places on the right */}

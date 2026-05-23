@@ -22,13 +22,30 @@
   z-index: 0;
   background: #0a0c10;
   border-right: 1px solid rgba(181, 138, 58, 0.18);
+  /* center the aspect-ratio'd canvas inside the stage */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* the canvas matches the map image's exact aspect ratio (2200×1650 = 4:3).
+   With width:100% / max-height:100% + aspect-ratio, the browser fits the
+   canvas to the largest box that holds the map without cropping. */
+.canvas {
+  position: relative;
+  aspect-ratio: 2200 / 1650;
+  width: 100%;
+  max-height: 100%;
+  /* container queries fallback for older browsers — most modern engines
+     respect aspect-ratio + max-height directly */
 }
 
 .mapImage {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
+  background-size: 100% 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
   transition: transform 1100ms cubic-bezier(0.4, 0, 0.2, 1);
   filter: saturate(0.96) contrast(1.04);
 }
