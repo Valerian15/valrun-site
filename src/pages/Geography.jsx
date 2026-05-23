@@ -83,7 +83,7 @@ const PLACES = [
     name: "Everpeak",
     region: "Verdure",
     label: "the city of the Council of Five",
-    x: 19, y: 22, scale: 2.6,
+    x: 20, y: 23, scale: 2.6,
     body: (
       <p>
         Capital city-state of Verdure, founded in 927 AI on the bones of imperial{" "}
@@ -122,7 +122,7 @@ const PLACES = [
     name: "Timbercross",
     region: "Verdure",
     label: "the forest-and-artisan capital",
-    x: 31, y: 12, scale: 2.6,
+    x: 32, y: 12, scale: 2.6,
     body: (
       <p>
         Capital of the Kingdom of <strong>Eryndor</strong>, under Queen Isolde Taren. A
