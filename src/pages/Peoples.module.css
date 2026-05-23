@@ -59,24 +59,6 @@
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
 }
 
-.rule {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  justify-content: center;
-  color: var(--gold);
-  margin: var(--space-5) auto var(--space-5);
-  width: 60%;
-  max-width: 280px;
-}
-.rule::before, .rule::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-  opacity: 0.7;
-}
-
 .lede {
   font-family: var(--serif);
   font-style: italic;
@@ -197,15 +179,6 @@
 .cornerBR::before { content: ""; position: absolute; bottom: -1px; right: -1px; width: 6px; height: 6px; border-bottom: 1px solid var(--gold); border-right: 1px solid var(--gold); }
 
 /* ── card content ────────────────────────────────────── */
-.cardEyebrow {
-  font-family: var(--smcap);
-  font-size: 0.62rem;
-  letter-spacing: 0.32em;
-  color: var(--vellum-mute);
-  text-transform: uppercase;
-  margin-bottom: var(--space-2);
-}
-
 .cardName {
   font-family: var(--serif);
   font-weight: 500;

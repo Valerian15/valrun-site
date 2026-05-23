@@ -36,7 +36,6 @@ function Card({ p }) {
       <div className={styles.cardInner}>
         <div className={`${styles.cardFace} ${styles.cardFront}`}>
           <Corners />
-          <div className={styles.cardEyebrow}>The Kindred</div>
           <h2 className={styles.cardName}>{p.name}</h2>
           <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
           <div className={styles.plate} aria-hidden="true">
@@ -51,7 +50,6 @@ function Card({ p }) {
 
         <div className={`${styles.cardFace} ${styles.cardBack}`}>
           <Corners />
-          <div className={styles.cardEyebrow}>The Kindred</div>
           <h2 className={styles.cardNameBack}>{p.name}</h2>
           <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
           <p className={styles.cardDesc}>{p.desc}</p>
@@ -71,7 +69,6 @@ export default function Peoples() {
       <header className={styles.head}>
         <div className={styles.eyebrow}>Chapter IV</div>
         <h1 className={styles.title}>The Peoples</h1>
-        <div className={styles.rule} aria-hidden="true"><span>◆</span></div>
         <p className={styles.lede}>
           Twelve kindreds, laid out as a spread. Turn any card to read its tale.
         </p>
