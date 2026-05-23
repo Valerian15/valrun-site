@@ -189,7 +189,7 @@ const PLACES = [
     name: "Luneberg",
     region: "Twiland",
     label: "the elven seat",
-    x: 10, y: 93, scale: 2.6,
+    x: 12, y: 91, scale: 2.6,
     body: (
       <p>
         Hidden city of Twiland under Lord Caelindor Aethyn. Chairs the annual Council of
