@@ -145,9 +145,3 @@ export const HISTORY = [
 
 export const HISTORY_INTRO =
   "Val'Run divides its past into Seven Ages, of which the first two predate the common calendar. The present year is 1,147 AI.";
-
-export const HISTORY_VARIANTS = [
-  { to: "/history",   label: "Current" },
-  { to: "/history/1", label: "I · Time-river" },
-  { to: "/history/2", label: "II · Map-timeline" },
-];

@@ -1,9 +1,8 @@
 /* ──────────────────────────────────────────────────────────────
-   History · Variant II — Map-as-timeline
-   Left half of the screen is the ValRun map (sticky), zooming
-   and panning to wherever the current Age happened. Right half
-   is the scrolling era-by-era body. A pulsing pin marks the
-   current focal point on the map.
+   The Geography — map-as-explorer
+   Left half: sticky map that zooms/pans to each named place.
+   Right half: scrolling place-by-place column. IntersectionObserver
+   on each place updates the map's focal point.
    ────────────────────────────────────────────────────────────── */
 
 .mapPage {
@@ -12,7 +11,7 @@
   min-height: 100vh;
 }
 
-/* ── sticky map stage (left half) ──────────────────── */
+/* ── sticky map stage (left side) ──────────────────── */
 .stage {
   position: fixed;
   top: 0;
@@ -39,11 +38,11 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 80%, rgba(0, 0, 0, 0.55) 100%),
-    linear-gradient(to right, rgba(14, 16, 20, 0.05) 0%, transparent 30%, transparent 70%, rgba(14, 16, 20, 0.45) 100%);
+    radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0.55) 100%),
+    linear-gradient(to right, rgba(14, 16, 20, 0.05) 0%, transparent 30%, transparent 70%, rgba(14, 16, 20, 0.5) 100%);
 }
 
-/* pulsing focal pin */
+/* pulsing gold focal pin */
 .pin {
   position: absolute;
   width: 0;
@@ -62,7 +61,9 @@
   margin: -7px;
   background: var(--gold);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(14, 16, 20, 0.85), 0 0 18px rgba(181, 138, 58, 0.8);
+  box-shadow:
+    0 0 0 4px rgba(14, 16, 20, 0.85),
+    0 0 18px rgba(181, 138, 58, 0.8);
   z-index: 2;
 }
 
@@ -84,7 +85,7 @@
   100% { transform: scale(2.4); opacity: 0; }
 }
 
-/* ── scrolling body (right half) ───────────────────── */
+/* ── scrolling places (right side) ─────────────────── */
 .scrollArea {
   position: relative;
   z-index: 1;
@@ -117,29 +118,13 @@
   margin: var(--space-2) 0;
 }
 
-.headRule {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  color: var(--gold);
-  margin: var(--space-4) 0 var(--space-5);
-  max-width: 240px;
-}
-.headRule::before, .headRule::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-  opacity: 0.7;
-}
-
 .lede {
   font-family: var(--serif);
   font-style: italic;
   font-size: 1.2rem;
   line-height: 1.55;
   color: var(--vellum);
-  margin: 0 0 var(--space-3);
+  margin: var(--space-4) 0 var(--space-3);
 }
 
 .hint {
@@ -149,16 +134,16 @@
   font-style: italic;
 }
 
-/* ── era cards in the scroll column ────────────────── */
-.eras {
+/* ── place cards in the scroll column ─────────────── */
+.places {
   max-width: 540px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-12);
+  gap: var(--space-10);
 }
 
-.era {
+.place {
   padding: var(--space-7) var(--space-7) var(--space-6);
   background: rgba(14, 16, 20, 0.8);
   backdrop-filter: blur(10px);
@@ -167,74 +152,47 @@
   transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
 }
 
-.era:hover {
+.place:hover {
   border-color: rgba(181, 138, 58, 0.5);
   background: rgba(14, 16, 20, 0.92);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
 }
 
-.eraHead {
-  display: grid;
-  grid-template-columns: 56px 1fr;
-  align-items: start;
-  gap: var(--space-4);
-  margin-bottom: var(--space-5);
+.placeHead {
+  margin-bottom: var(--space-4);
 }
 
-.roman {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-style: italic;
-  font-size: 2.4rem;
-  color: var(--gold);
-  line-height: 1;
-  text-align: center;
-  padding-top: 6px;
-}
-
-.eraHeadText {
-  /* container */
-}
-
-.era_label {
+.placeLabel {
   font-family: var(--smcap);
   font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  color: var(--vellum-mute);
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.eraTitle {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-style: italic;
-  font-size: 1.55rem;
-  line-height: 1.1;
-  color: var(--vellum);
-  margin: 0 0 var(--space-2);
-}
-
-.locus {
-  font-family: var(--smcap);
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   color: var(--gold);
   text-transform: uppercase;
+  margin-bottom: var(--space-2);
   opacity: 0.85;
 }
 
-.body {
+.placeName {
   font-family: var(--serif);
-  font-size: 1.02rem;
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.7rem;
+  line-height: 1.1;
+  color: var(--vellum);
+  margin: 0;
+}
+
+.placeBody {
+  font-family: var(--serif);
+  font-size: 1.05rem;
   line-height: 1.7;
   color: var(--vellum);
 }
 
-.body p { margin: 0 0 var(--space-3); }
-.body p:last-child { margin-bottom: 0; }
+.placeBody p { margin: 0 0 var(--space-3); }
+.placeBody p:last-child { margin-bottom: 0; }
 
-.body strong {
+.placeBody strong {
   color: var(--gold);
   font-weight: 500;
 }
@@ -242,7 +200,7 @@
 /* ── narrow screens: map collapses above content ───── */
 @media (max-width: 900px) {
   .stage {
-    position: relative;
+    position: sticky;
     width: 100%;
     height: 50vh;
     border-right: none;
@@ -252,7 +210,7 @@
     margin-left: 0;
     padding: var(--space-12) var(--space-5) var(--space-20);
   }
-  .eras { max-width: 680px; }
+  .places { max-width: 680px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
