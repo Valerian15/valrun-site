@@ -83,7 +83,7 @@ const PLACES = [
     name: "Everpeak",
     region: "Verdure",
     label: "the city of the Council of Five",
-    x: 20, y: 27, scale: 2.6,
+    x: 18, y: 24, scale: 2.6,
     body: (
       <p>
         Capital city-state of Verdure, founded in 927 AI on the bones of imperial{" "}
@@ -109,7 +109,7 @@ const PLACES = [
     name: "Bastion's Reach",
     region: "Verdure",
     label: "the northern naval gate",
-    x: 78, y: 13, scale: 2.6,
+    x: 78, y: 10, scale: 2.6,
     body: (
       <p>
         Fortified port-capital of the Kingdom of <strong>Rhystara</strong>, under King Aldric
@@ -122,7 +122,7 @@ const PLACES = [
     name: "Timbercross",
     region: "Verdure",
     label: "the forest-and-artisan capital",
-    x: 28, y: 17, scale: 2.6,
+    x: 28, y: 15, scale: 2.6,
     body: (
       <p>
         Capital of the Kingdom of <strong>Eryndor</strong>, under Queen Isolde Taren. A
