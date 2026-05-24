@@ -119,10 +119,6 @@ function CinematicBody({ bodyStyle, heroImage, children }) {
       </div>
     );
   }
-  /* timeline — vertical spine, era cards alternating left/right (History) */
-  if (bodyStyle === "timeline") {
-    return <div className={styles.bodyTimeline}>{children}</div>;
-  }
   /* default cinematic body — clean centered column */
   return <div className={`container ${styles.cinematicBody}`}>{children}</div>;
 }
