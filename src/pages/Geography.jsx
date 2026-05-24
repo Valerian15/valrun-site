@@ -253,7 +253,7 @@ const PLACES = [
     name: "Brabrar",
     region: "Sarudar",
     label: "the trade gate",
-    x: 84, y: 58, scale: 2.6,
+    x: 84, y: 56, scale: 2.6,
     body: (
       <p>
         Western coastal trade town and one of the three pillars of the{" "}
