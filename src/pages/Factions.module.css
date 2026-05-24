@@ -1,5 +1,5 @@
-/* The Peoples — page wrapper (full-bleed bg + header + spread).
-   Card styling lives in src/components/TarotCard.module.css.        */
+/* The Factions — sectioned page of tarot spreads. Card styling
+   lives in src/components/TarotCard.module.css.                     */
 
 .tarotWrap {
   position: relative;
@@ -14,7 +14,7 @@
   inset: 0;
   background-size: cover;
   background-position: center;
-  filter: blur(4px) saturate(0.8) brightness(0.3);
+  filter: blur(4px) saturate(0.8) brightness(0.28);
   transform: scale(1.05);
   z-index: -2;
 }
@@ -28,6 +28,7 @@
   z-index: -1;
 }
 
+/* ── page header ───────────────────────────────────── */
 .head {
   text-align: center;
   margin: 0 auto var(--space-16);
@@ -60,19 +61,59 @@
   font-style: italic;
   font-size: 1.25rem;
   color: var(--vellum-dim);
-  max-width: 560px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-/* ── spread ─────────────────────────────────────────── */
+/* ── card-spread section (heading + spread) ───────── */
+.cardSection {
+  max-width: 1200px;
+  margin: 0 auto var(--space-16);
+  position: relative;
+  z-index: 1;
+}
+
+.sectionHead {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0 auto var(--space-8);
+  max-width: 720px;
+  padding-bottom: var(--space-3);
+}
+
+.sectionOrnament {
+  color: var(--gold);
+  font-size: 0.95rem;
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
+.sectionName {
+  font-family: var(--smcap);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.38em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 500;
+}
+
+.sectionRule {
+  height: 1px;
+  background: linear-gradient(to right, rgba(181, 138, 58, 0.6), transparent);
+  align-self: center;
+  margin-top: 4px;
+}
+
+/* ── tarot spread inside a card section ──────────── */
 .spread {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   gap: var(--space-12) var(--space-8);
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-8) 0 var(--space-24);
+  padding: var(--space-4) 0 var(--space-8);
   perspective: 1400px;
 }
