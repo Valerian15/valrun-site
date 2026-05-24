@@ -96,94 +96,172 @@
 .entries {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-5);
 }
 
 .entry {
   position: relative;
-  padding: var(--space-5) var(--space-6) var(--space-5) var(--space-7);
-  background: rgba(22, 25, 32, 0.55);
-  border: 1px solid rgba(181, 138, 58, 0.14);
-  border-radius: 2px;
+  padding: var(--space-9) var(--space-9) var(--space-8);
+  background:
+    radial-gradient(ellipse at top, rgba(60, 50, 35, 0.18) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(26, 28, 36, 0.78) 0%, rgba(14, 16, 20, 0.85) 100%);
+  border: 1px solid rgba(181, 138, 58, 0.28);
   cursor: pointer;
   outline: none;
+  text-align: center;
   transition:
-    background 240ms ease,
-    border-color 240ms ease,
-    transform 240ms ease;
+    background 280ms ease,
+    border-color 280ms ease,
+    transform 280ms ease,
+    box-shadow 280ms ease;
 }
 
-/* gold accent rule on the left edge — half-height by default,
-   becomes the active indicator when full */
+/* INNER FRAME — a second, lighter rule 10px in from each edge.
+   Together with the outer border it creates a "double-rule" plate look. */
 .entry::before {
   content: "";
   position: absolute;
-  top: 22%;
-  bottom: 22%;
-  left: 0;
+  inset: 10px;
+  border: 1px solid rgba(181, 138, 58, 0.18);
+  pointer-events: none;
+  transition: border-color 280ms ease;
+}
+
+/* ACTIVE-state gold rule running down the LEFT outer edge */
+.entry::after {
+  content: "";
+  position: absolute;
+  top: 30%;
+  bottom: 30%;
+  left: -1px;
   width: 2px;
   background: rgba(181, 138, 58, 0.32);
-  transition: all 240ms ease;
+  transition: all 280ms ease;
 }
 
 .entry:hover {
-  background: rgba(28, 32, 40, 0.78);
-  border-color: rgba(181, 138, 58, 0.28);
+  border-color: rgba(181, 138, 58, 0.48);
 }
 
 .entry:hover::before {
-  background: rgba(181, 138, 58, 0.6);
-  top: 10%;
-  bottom: 10%;
+  border-color: rgba(181, 138, 58, 0.3);
+}
+
+.entry:hover::after {
+  background: rgba(181, 138, 58, 0.65);
+  top: 12%;
+  bottom: 12%;
 }
 
 .entry:focus-visible {
-  border-color: rgba(181, 138, 58, 0.55);
+  border-color: var(--gold);
 }
 
 .entry.active {
-  background: rgba(34, 38, 48, 0.88);
-  border-color: rgba(181, 138, 58, 0.42);
-  transform: translateX(-3px);
+  border-color: var(--gold);
+  background:
+    radial-gradient(ellipse at top, rgba(80, 65, 40, 0.28) 0%, transparent 60%),
+    linear-gradient(180deg, rgba(34, 36, 44, 0.9) 0%, rgba(20, 22, 28, 0.92) 100%);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.55),
+    0 0 30px rgba(181, 138, 58, 0.12);
+  transform: translateY(-2px);
 }
 
 .entry.active::before {
+  border-color: rgba(181, 138, 58, 0.4);
+}
+
+.entry.active::after {
   background: var(--gold);
   top: 0;
   bottom: 0;
   width: 3px;
-  box-shadow: 0 0 14px rgba(181, 138, 58, 0.5);
+  box-shadow: 0 0 16px rgba(181, 138, 58, 0.6);
 }
 
+/* ── gold corner brackets — four little Ls at each card corner ── */
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cornerTL { top: 4px; left: 4px;   border-top: 1px solid rgba(181, 138, 58, 0.7); border-left: 1px solid rgba(181, 138, 58, 0.7); }
+.cornerTR { top: 4px; right: 4px;  border-top: 1px solid rgba(181, 138, 58, 0.7); border-right: 1px solid rgba(181, 138, 58, 0.7); }
+.cornerBL { bottom: 4px; left: 4px;  border-bottom: 1px solid rgba(181, 138, 58, 0.7); border-left: 1px solid rgba(181, 138, 58, 0.7); }
+.cornerBR { bottom: 4px; right: 4px; border-bottom: 1px solid rgba(181, 138, 58, 0.7); border-right: 1px solid rgba(181, 138, 58, 0.7); }
+
+.entry.active .corner { border-color: var(--gold); }
+
+/* ── card content ─────────────────────────────────── */
 .name {
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: 1.3rem;
-  line-height: 1.2;
+  font-size: 1.5rem;
+  line-height: 1.15;
   color: var(--vellum);
-  margin: 0 0 var(--space-3);
+  margin: 0;
+  letter-spacing: 0.005em;
 }
 
 .label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
   color: var(--vellum-dim);
-  font-weight: 400;
-  font-size: 0.9em;
+  margin: var(--space-2) 0 0;
+  letter-spacing: 0.015em;
+}
+
+/* small gold rule with centered diamond between header + body */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+  color: var(--gold);
+  margin: var(--space-4) auto var(--space-5);
+  width: 60%;
+  max-width: 180px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(181, 138, 58, 0.55), transparent);
+}
+
+.dividerMark {
+  font-size: 0.65rem;
+  transform: rotate(45deg);
+  display: inline-block;
+  opacity: 0.85;
 }
 
 .body {
   font-family: var(--serif);
-  font-size: 0.98rem;
-  line-height: 1.65;
-  color: var(--vellum-dim);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--vellum);
+  text-align: left;
+  max-width: 100%;
 }
 
-.body p { margin: 0 0 var(--space-2); }
+.body p { margin: 0 0 var(--space-3); }
 .body p:last-child { margin-bottom: 0; }
 
 .body strong { color: var(--gold); font-weight: 500; }
 
-.entry.active .body { color: var(--vellum); }
+@media (max-width: 900px) {
+  .entry { padding: var(--space-7) var(--space-7) var(--space-6); }
+  .name { font-size: 1.35rem; }
+}
 
 @media (max-width: 900px) {
   .scrollArea { margin-left: 0; padding: var(--space-12) var(--space-5) var(--space-20); }

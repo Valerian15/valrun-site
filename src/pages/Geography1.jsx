@@ -47,10 +47,16 @@ function Entry({ place, index, isActive, onActivate }) {
       tabIndex={0}
       aria-current={isActive ? "true" : undefined}
     >
-      <h3 className={styles.name}>
-        {place.name}
-        {place.label && <span className={styles.label}> — {place.label}</span>}
-      </h3>
+      <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
+
+      <h3 className={styles.name}>{place.name}</h3>
+      {place.label && <div className={styles.label}>{place.label}</div>}
+      <div className={styles.divider} aria-hidden="true">
+        <span className={styles.dividerMark}>◆</span>
+      </div>
       <div className={styles.body}>{place.body}</div>
     </article>
   );
