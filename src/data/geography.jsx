@@ -357,9 +357,3 @@ export const PLACES = [
   },
 ];
 
-export const GEOGRAPHY_VARIANTS = [
-  { to: "/geography",   label: "Current" },
-  { to: "/geography/1", label: "I · Almanac" },
-  { to: "/geography/2", label: "II · Gazetteer" },
-  { to: "/geography/3", label: "III · Plate" },
-];

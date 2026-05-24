@@ -1,18 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import GeoMapStage from "../components/GeoMapStage.jsx";
-import VariantSwitch from "../components/VariantSwitch.jsx";
-import { PLACES, GEOGRAPHY_VARIANTS } from "../data/geography.jsx";
+import { PLACES } from "../data/geography.jsx";
 import styles from "./Geography.module.css";
 
-function Place({ place, index, isActive, onActivate }) {
+/* The Geography — an almanac of Val'Run.
+ * Places grouped under region chapters; each place is its own framed
+ * card with gold corner brackets. Click or scroll to make the sticky
+ * left-side map pan/zoom to that place. */
+
+function Entry({ place, index, isActive, onActivate }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
-    /* the "active zone" is a thin band 28%–58% from the top of the
-       viewport — when a card's top crosses into that band, it becomes
-       the current focus. This matches where you'd actually be reading. */
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -33,7 +34,7 @@ function Place({ place, index, isActive, onActivate }) {
   return (
     <article
       ref={ref}
-      className={`${styles.place} ${isActive ? styles.active : ""}`}
+      className={`${styles.entry} ${isActive ? styles.active : ""}`}
       onClick={handleClick}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
@@ -44,12 +45,15 @@ function Place({ place, index, isActive, onActivate }) {
       role="button"
       tabIndex={0}
       aria-current={isActive ? "true" : undefined}
-      aria-label={`${place.name} — ${place.region}`}
     >
-      <div className={styles.placeRegion}>{place.region}</div>
-      <h2 className={styles.placeName}>{place.name}</h2>
-      {place.label && <div className={styles.placeLabel}>{place.label}</div>}
-      <div className={styles.placeBody}>{place.body}</div>
+      <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
+      <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
+
+      <h3 className={styles.name}>{place.name}</h3>
+      {place.label && <div className={styles.label}>{place.label}</div>}
+      <div className={styles.body}>{place.body}</div>
     </article>
   );
 }
@@ -57,6 +61,20 @@ function Place({ place, index, isActive, onActivate }) {
 export default function Geography() {
   const [activeIndex, setActiveIndex] = useState(0);
   const focus = PLACES[activeIndex] ?? PLACES[0];
+
+  /* group places by region, preserving original index for the observer */
+  const grouped = useMemo(() => {
+    const order = [];
+    const byRegion = {};
+    PLACES.forEach((p, i) => {
+      if (!byRegion[p.region]) {
+        byRegion[p.region] = [];
+        order.push(p.region);
+      }
+      byRegion[p.region].push({ ...p, _index: i });
+    });
+    return order.map((region) => ({ region, places: byRegion[region] }));
+  }, []);
 
   return (
     <div className={styles.mapPage}>
@@ -70,25 +88,32 @@ export default function Geography() {
             A continent of four faces, drawn together — and slowly torn apart — by a single
             inland sea.
           </p>
-          <div className={styles.hint}>
-            Scroll or click a place — the map will travel with you.
-          </div>
+          <div className={styles.hint}>An almanac of Val'Run. Scroll or click any place.</div>
         </header>
 
-        <div className={styles.places}>
-          {PLACES.map((place, i) => (
-            <Place
-              key={place.name}
-              place={place}
-              index={i}
-              isActive={i === activeIndex}
-              onActivate={setActiveIndex}
-            />
+        <div className={styles.almanac}>
+          {grouped.map(({ region, places }) => (
+            <section key={region} className={styles.region}>
+              <header className={styles.regionHead}>
+                <div className={styles.regionOrnament} aria-hidden="true">✦</div>
+                <h2 className={styles.regionName}>{region}</h2>
+                <div className={styles.regionRule} aria-hidden="true" />
+              </header>
+              <div className={styles.entries}>
+                {places.map((place) => (
+                  <Entry
+                    key={place.name}
+                    place={place}
+                    index={place._index}
+                    isActive={place._index === activeIndex}
+                    onActivate={setActiveIndex}
+                  />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </div>
-
-      <VariantSwitch variants={GEOGRAPHY_VARIANTS} label="Geography · style" />
     </div>
   );
 }
