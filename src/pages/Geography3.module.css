@@ -1,30 +1,26 @@
-/* Variant III — Editorial spread */
+/* Atlas III — Plate
+   Each entry is a numbered plate. Roman-numeral spine on the left,
+   region + name + locus + body + a "reference" footer with the
+   actual map coordinates — like the back of a real atlas plate. */
 
-.mapPage {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-}
+.mapPage { position: relative; isolation: isolate; min-height: 100vh; }
 
 .scrollArea {
   position: relative;
   z-index: 1;
   margin-left: 55%;
   padding: var(--space-16) var(--space-8) var(--space-24);
-  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.75) 100%);
+  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.78) 100%);
   min-height: 100vh;
 }
 
-.head {
-  margin: 0 auto var(--space-16);
-  max-width: 580px;
-  text-align: center;
-}
+/* ── page header ───────────────────────────────────── */
+.head { max-width: 580px; margin: 0 auto var(--space-12); }
 
 .eyebrow {
   font-family: var(--smcap);
   font-size: 0.78rem;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   color: var(--gold);
   text-transform: uppercase;
   margin-bottom: var(--space-3);
@@ -33,7 +29,7 @@
 .title {
   font-family: var(--serif);
   font-weight: 500;
-  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
   line-height: 1.05;
   color: var(--vellum);
   margin: var(--space-2) 0;
@@ -42,10 +38,10 @@
 .lede {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   line-height: 1.55;
   color: var(--vellum);
-  margin: var(--space-4) auto var(--space-2);
+  margin: var(--space-4) 0 var(--space-2);
 }
 
 .hint {
@@ -55,127 +51,153 @@
   font-style: italic;
 }
 
-/* ── spreads ──────────────────────────────────────── */
-.spreads {
-  max-width: 580px;
+/* ── plates list ───────────────────────────────────── */
+.plates {
+  max-width: 620px;
   margin: 0 auto;
 }
 
-.spread {
-  position: relative;
-  padding: var(--space-10) 0;
+.plate {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: var(--space-6);
+  align-items: start;
+  padding: var(--space-7) 0;
+  border-top: 1px solid rgba(181, 138, 58, 0.16);
   cursor: pointer;
   outline: none;
-  text-align: center;
-  transition: opacity 240ms ease;
+  transition: background 260ms ease;
 }
 
-.spread:focus-visible {
-  outline: 1px solid rgba(181, 138, 58, 0.5);
-  outline-offset: 8px;
+.plates .plate:last-of-type {
+  border-bottom: 1px solid rgba(181, 138, 58, 0.16);
 }
+
+.plate:hover { background: rgba(255, 255, 255, 0.02); }
+
+.plate:focus-visible {
+  outline: 1px solid rgba(181, 138, 58, 0.5);
+  outline-offset: 2px;
+}
+
+.plate.active {
+  background: rgba(181, 138, 58, 0.04);
+}
+
+/* ── roman numeral spine ───────────────────────────── */
+.numeral {
+  text-align: right;
+  padding-top: 2px;
+  border-right: 1px solid rgba(181, 138, 58, 0.25);
+  padding-right: var(--space-4);
+  margin: 0;
+  transition: border-color 260ms ease;
+}
+
+.plate.active .numeral { border-right-color: var(--gold); }
+
+.numeralLabel {
+  font-family: var(--smcap);
+  font-size: 0.56rem;
+  letter-spacing: 0.32em;
+  color: var(--vellum-mute);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.numeralValue {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--vellum-dim);
+  transition: color 260ms ease, text-shadow 260ms ease;
+}
+
+.plate.active .numeralValue {
+  color: var(--gold);
+  text-shadow: 0 0 16px rgba(181, 138, 58, 0.5);
+}
+
+/* ── plate body ────────────────────────────────────── */
+.plateBody { min-width: 0; }
 
 .region {
   font-family: var(--smcap);
-  font-size: 0.7rem;
-  letter-spacing: 0.42em;
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
   color: var(--vellum-mute);
   text-transform: uppercase;
-  margin-bottom: var(--space-3);
-  transition: color 240ms ease;
+  margin-bottom: var(--space-2);
+  transition: color 260ms ease;
 }
 
-.spread.active .region {
-  color: var(--gold);
-}
+.plate.active .region { color: var(--gold); }
 
 .name {
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: clamp(2rem, 3.4vw, 2.6rem);
-  line-height: 1.1;
+  font-size: 1.55rem;
+  line-height: 1.15;
   color: var(--vellum);
-  margin: 0 0 var(--space-2);
+  margin: 0;
 }
 
 .label {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--vellum-dim);
-  margin-bottom: var(--space-6);
-  letter-spacing: 0.02em;
+  margin: var(--space-1) 0 var(--space-4);
 }
 
-/* body returns to left-align for readability */
-.body {
+.text {
   font-family: var(--serif);
-  font-size: 1.08rem;
-  line-height: 1.75;
+  font-size: 1rem;
+  line-height: 1.7;
   color: var(--vellum);
-  text-align: left;
 }
 
-.body p { margin: 0 0 var(--space-3); }
-.body p:last-child { margin-bottom: 0; }
+.text p { margin: 0 0 var(--space-2); }
+.text p:last-child { margin-bottom: 0; }
 
-.body strong {
-  color: var(--gold);
-  font-weight: 500;
-}
+.text strong { color: var(--gold); font-weight: 500; }
 
-/* drop-cap on the FIRST paragraph of the body */
-.body > p:first-child::first-letter,
-.body > div > p:first-child::first-letter {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-style: italic;
-  float: left;
-  font-size: 3.6em;
-  line-height: 0.85;
-  padding: 0.05em 0.12em 0 0;
-  color: rgba(181, 138, 58, 0.55);
-  transition: color 240ms ease, text-shadow 240ms ease;
-}
-
-.spread.active .body > p:first-child::first-letter,
-.spread.active .body > div > p:first-child::first-letter {
-  color: var(--gold);
-  text-shadow: 0 0 22px rgba(181, 138, 58, 0.45);
-}
-
-/* ornament between spreads */
-.ornament {
+/* ── reference footer — fake "back-of-atlas" coords ── */
+.reference {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--space-4);
-  margin: var(--space-2) auto;
-  color: var(--gold);
-  width: 60%;
-  max-width: 280px;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+  padding-top: var(--space-3);
+  border-top: 1px dotted rgba(181, 138, 58, 0.25);
+  font-family: var(--smcap);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  color: var(--vellum-mute);
+  text-transform: uppercase;
 }
 
-.ornament::before,
-.ornament::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(181, 138, 58, 0.45), transparent);
-}
+.refLabel { opacity: 0.8; }
 
-.ornamentMark {
-  font-size: 0.85rem;
-  transform: rotate(45deg);
-  display: inline-block;
-  opacity: 0.7;
-}
+.refCoord { color: var(--vellum-dim); }
+
+.refSep { color: var(--vellum-mute); opacity: 0.6; }
+
+.refScale { color: var(--vellum-mute); }
+
+.plate.active .reference { border-top-color: rgba(181, 138, 58, 0.5); }
+.plate.active .refCoord { color: var(--gold); }
 
 @media (max-width: 900px) {
-  .scrollArea {
-    margin-left: 0;
-    padding: var(--space-12) var(--space-5) var(--space-20);
-  }
-  .spreads { max-width: 680px; }
+  .scrollArea { margin-left: 0; padding: var(--space-12) var(--space-5) var(--space-20); }
+  .plates { max-width: 680px; }
+}
+
+@media (max-width: 640px) {
+  .plate { grid-template-columns: 56px 1fr; gap: var(--space-4); }
+  .numeralValue { font-size: 1.6rem; }
+  .name { font-size: 1.35rem; }
 }

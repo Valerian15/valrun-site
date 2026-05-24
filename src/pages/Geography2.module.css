@@ -1,24 +1,20 @@
-/* Variant II — Refined cards */
+/* Atlas II — Gazetteer
+   Large serif names, region as a folio-mark tag, italic locus,
+   thin gold rule, body in a generous single column.       */
 
-.mapPage {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-}
+.mapPage { position: relative; isolation: isolate; min-height: 100vh; }
 
 .scrollArea {
   position: relative;
   z-index: 1;
   margin-left: 55%;
   padding: var(--space-16) var(--space-8) var(--space-24);
-  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.75) 100%);
+  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.78) 100%);
   min-height: 100vh;
 }
 
-.head {
-  margin: 0 auto var(--space-12);
-  max-width: 520px;
-}
+/* ── page header ───────────────────────────────────── */
+.head { max-width: 560px; margin: 0 auto var(--space-12); }
 
 .eyebrow {
   font-family: var(--smcap);
@@ -54,128 +50,129 @@
   font-style: italic;
 }
 
-/* ── card column ──────────────────────────────────── */
-.cards {
-  max-width: 520px;
+/* ── entries ───────────────────────────────────────── */
+.entries {
+  max-width: 560px;
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
 }
 
-.card {
+.entry {
   position: relative;
-  padding: var(--space-7) var(--space-7) var(--space-6) var(--space-8);
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(181, 138, 58, 0.12);
-  border-radius: 2px;
+  padding: var(--space-10) 0 var(--space-10) var(--space-2);
+  border-top: 1px solid rgba(181, 138, 58, 0.14);
   cursor: pointer;
   outline: none;
-  transition:
-    background 240ms ease,
-    border-color 240ms ease,
-    transform 240ms ease;
+  transition: padding-left 280ms ease;
 }
 
-/* subtle gold left bar — thin by default, thicker on active */
-.card::before {
+.entries .entry:last-of-type {
+  border-bottom: 1px solid rgba(181, 138, 58, 0.14);
+}
+
+/* tiny gold leader on the left margin */
+.entry::before {
   content: "";
   position: absolute;
-  top: var(--space-5);
-  bottom: var(--space-5);
-  left: 0;
-  width: 2px;
-  background: rgba(181, 138, 58, 0.3);
-  transition:
-    background 240ms ease,
-    top 240ms ease,
-    bottom 240ms ease,
-    width 240ms ease,
-    box-shadow 240ms ease;
+  top: 50%;
+  left: -28px;
+  width: 18px;
+  height: 1px;
+  background: rgba(181, 138, 58, 0.35);
+  transform: translateY(-50%);
+  transition: all 280ms ease;
 }
 
-.card:hover {
-  background: rgba(255, 255, 255, 0.045);
-  border-color: rgba(181, 138, 58, 0.28);
-}
-
-.card:hover::before {
-  background: rgba(181, 138, 58, 0.6);
-}
-
-.card:focus-visible {
-  border-color: var(--gold);
-}
-
-/* active state — full gold bar + soft glow + brighter bg */
-.card.active {
-  background: rgba(181, 138, 58, 0.06);
-  border-color: rgba(181, 138, 58, 0.42);
-  transform: translateX(-3px);
-}
-
-.card.active::before {
+.entry:hover::before {
   background: var(--gold);
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  box-shadow: 0 0 18px rgba(181, 138, 58, 0.5);
+  width: 26px;
 }
 
-/* card content */
-.region {
+.entry:hover { padding-left: var(--space-3); }
+
+.entry:focus-visible {
+  outline: 1px solid rgba(181, 138, 58, 0.5);
+  outline-offset: 4px;
+}
+
+/* active state: large gold leader and slight indent */
+.entry.active {
+  padding-left: var(--space-4);
+}
+
+.entry.active::before {
+  background: var(--gold);
+  width: 40px;
+  height: 2px;
+  box-shadow: 0 0 14px rgba(181, 138, 58, 0.5);
+}
+
+/* folio mark in the upper-right corner */
+.folio {
+  position: absolute;
+  top: var(--space-7);
+  right: 0;
   font-family: var(--smcap);
-  font-size: 0.66rem;
-  letter-spacing: 0.28em;
+  font-size: 0.62rem;
+  letter-spacing: 0.36em;
   color: var(--vellum-mute);
   text-transform: uppercase;
-  margin-bottom: var(--space-3);
   transition: color 240ms ease;
 }
 
-.card.active .region {
-  color: var(--gold);
-}
+.entry.active .folio { color: var(--gold); }
 
+/* name — the centerpiece */
 .name {
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: 1.55rem;
-  line-height: 1.15;
+  font-size: clamp(1.7rem, 2.6vw, 2.1rem);
+  line-height: 1.1;
   color: var(--vellum);
   margin: 0;
+  letter-spacing: 0.005em;
+  transition: color 240ms ease;
 }
+
+.entry.active .name { color: var(--gold-hi); }
 
 .label {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--vellum-dim);
-  margin: var(--space-1) 0 var(--space-4);
+  margin: var(--space-2) 0 0;
+  letter-spacing: 0.015em;
+}
+
+.rule {
+  height: 1px;
+  width: 40px;
+  background: rgba(181, 138, 58, 0.4);
+  margin: var(--space-5) 0;
+  transition: width 280ms ease, background 240ms ease;
+}
+
+.entry.active .rule {
+  background: var(--gold);
+  width: 70px;
 }
 
 .body {
   font-family: var(--serif);
-  font-size: 1rem;
-  line-height: 1.65;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--vellum);
 }
 
 .body p { margin: 0 0 var(--space-2); }
 .body p:last-child { margin-bottom: 0; }
 
-.body strong {
-  color: var(--gold);
-  font-weight: 500;
-}
+.body strong { color: var(--gold); font-weight: 500; }
 
 @media (max-width: 900px) {
-  .scrollArea {
-    margin-left: 0;
-    padding: var(--space-12) var(--space-5) var(--space-20);
-  }
-  .cards { max-width: 680px; }
-  .card { padding: var(--space-6) var(--space-6) var(--space-5) var(--space-7); }
-  .name { font-size: 1.4rem; }
+  .scrollArea { margin-left: 0; padding: var(--space-12) var(--space-5) var(--space-20); }
+  .entries { max-width: 680px; }
+  .entry::before { left: 0; width: 12px; }
+  .entry:hover::before, .entry.active::before { width: 22px; }
 }

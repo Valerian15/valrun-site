@@ -1,15 +1,17 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import GeoMapStage from "../components/GeoMapStage.jsx";
 import VariantSwitch from "../components/VariantSwitch.jsx";
 import { PLACES, GEOGRAPHY_VARIANTS } from "../data/geography.jsx";
 import styles from "./Geography1.module.css";
 
-/* Atlas index — printed-book feel. No boxes. Hairline separators
- * between entries. Region tag in the left margin. Active state =
- * a single bold gold rule down the left margin of the current entry.  */
+/* Atlas I — ALMANAC
+ * Places are grouped under region "chapters". Each region gets a
+ * large illuminated section header; the places sit beneath it as
+ * compact entries with italic name + inline locus + short body. */
 
 function Entry({ place, index, isActive, onActivate }) {
   const ref = useRef(null);
+
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
@@ -45,16 +47,11 @@ function Entry({ place, index, isActive, onActivate }) {
       tabIndex={0}
       aria-current={isActive ? "true" : undefined}
     >
-      <div className={styles.gutter}>
-        <div className={styles.region}>{place.region}</div>
-      </div>
-      <div className={styles.entryBody}>
-        <h2 className={styles.name}>
-          {place.name}
-          {place.label && <span className={styles.label}> — {place.label}</span>}
-        </h2>
-        <div className={styles.text}>{place.body}</div>
-      </div>
+      <h3 className={styles.name}>
+        {place.name}
+        {place.label && <span className={styles.label}> — {place.label}</span>}
+      </h3>
+      <div className={styles.body}>{place.body}</div>
     </article>
   );
 }
@@ -63,32 +60,55 @@ export default function Geography1() {
   const [activeIndex, setActiveIndex] = useState(0);
   const focus = PLACES[activeIndex] ?? PLACES[0];
 
+  /* group places by region, preserving original index for the observer */
+  const grouped = useMemo(() => {
+    const order = [];
+    const byRegion = {};
+    PLACES.forEach((p, i) => {
+      if (!byRegion[p.region]) {
+        byRegion[p.region] = [];
+        order.push(p.region);
+      }
+      byRegion[p.region].push({ ...p, _index: i });
+    });
+    return order.map((region) => ({ region, places: byRegion[region] }));
+  }, []);
+
   return (
     <div className={styles.mapPage}>
       <GeoMapStage focus={focus} />
 
       <div className={styles.scrollArea}>
         <header className={styles.head}>
-          <div className={styles.eyebrow}>Chapter II · Variant I</div>
+          <div className={styles.eyebrow}>Chapter II · Atlas I</div>
           <h1 className={styles.title}>The Geography</h1>
           <p className={styles.lede}>
             A continent of four faces, drawn together — and slowly torn apart — by a single
             inland sea.
           </p>
-          <div className={styles.hint}>
-            Scroll or click a place — the map will travel with you.
-          </div>
+          <div className={styles.hint}>An almanac of Val'Run. Scroll or click any place.</div>
         </header>
 
-        <div className={styles.entries}>
-          {PLACES.map((place, i) => (
-            <Entry
-              key={place.name}
-              place={place}
-              index={i}
-              isActive={i === activeIndex}
-              onActivate={setActiveIndex}
-            />
+        <div className={styles.almanac}>
+          {grouped.map(({ region, places }) => (
+            <section key={region} className={styles.region}>
+              <header className={styles.regionHead}>
+                <div className={styles.regionOrnament} aria-hidden="true">✦</div>
+                <h2 className={styles.regionName}>{region}</h2>
+                <div className={styles.regionRule} aria-hidden="true" />
+              </header>
+              <div className={styles.entries}>
+                {places.map((place) => (
+                  <Entry
+                    key={place.name}
+                    place={place}
+                    index={place._index}
+                    isActive={place._index === activeIndex}
+                    onActivate={setActiveIndex}
+                  />
+                ))}
+              </div>
+            </section>
           ))}
         </div>
       </div>

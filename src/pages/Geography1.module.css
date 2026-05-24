@@ -1,26 +1,19 @@
-/* Variant I — Atlas index */
+/* Atlas I — Almanac
+   Region chapters with illuminated headers; places listed beneath. */
 
-.mapPage {
-  position: relative;
-  isolation: isolate;
-  min-height: 100vh;
-}
+.mapPage { position: relative; isolation: isolate; min-height: 100vh; }
 
 .scrollArea {
   position: relative;
   z-index: 1;
   margin-left: 55%;
   padding: var(--space-16) var(--space-8) var(--space-24);
-  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.75) 100%);
+  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.78) 100%);
   min-height: 100vh;
 }
 
-/* ── header ────────────────────────────────────────── */
-.head {
-  max-width: 540px;
-  margin: 0 auto var(--space-16);
-  padding-left: 110px; /* line up with entries' gutter */
-}
+/* ── page header ───────────────────────────────────── */
+.head { max-width: 540px; margin: 0 auto var(--space-12); }
 
 .eyebrow {
   font-family: var(--smcap);
@@ -56,133 +49,133 @@
   font-style: italic;
 }
 
-/* ── entries column ────────────────────────────────── */
+/* ── almanac body ──────────────────────────────────── */
+.almanac { max-width: 600px; margin: 0 auto; }
+
+.region {
+  margin-bottom: var(--space-16);
+}
+
+.region:last-child { margin-bottom: 0; }
+
+/* ── region chapter header ─────────────────────────── */
+.regionHead {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+}
+
+.regionOrnament {
+  color: var(--gold);
+  font-size: 0.95rem;
+  transform: translateY(-2px);
+  opacity: 0.85;
+}
+
+.regionName {
+  font-family: var(--smcap);
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.38em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 500;
+}
+
+.regionRule {
+  height: 1px;
+  background: linear-gradient(to right, rgba(181, 138, 58, 0.6), transparent);
+  align-self: center;
+  margin-top: 4px;
+}
+
+/* ── entry list under each region ──────────────────── */
 .entries {
-  max-width: 640px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
 
 .entry {
   position: relative;
-  display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: var(--space-5);
-  padding: var(--space-6) 0 var(--space-6) var(--space-4);
-  border-top: 1px solid rgba(181, 138, 58, 0.18);
+  padding: var(--space-4) var(--space-2) var(--space-4) var(--space-5);
   cursor: pointer;
   outline: none;
   transition: background 240ms ease;
 }
 
-.entries .entry:last-of-type {
-  border-bottom: 1px solid rgba(181, 138, 58, 0.18);
+.entry::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 14px;
+  background: rgba(181, 138, 58, 0.3);
+  transform: translateY(-50%);
+  transition: all 240ms ease;
 }
 
 .entry:hover {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.entry:hover::before {
+  background: rgba(181, 138, 58, 0.6);
+  height: 22px;
 }
 
 .entry:focus-visible {
   background: rgba(181, 138, 58, 0.06);
 }
 
-/* active state — a bold gold rule running the full height in the margin */
-.entry::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 2px;
-  background: var(--gold);
-  opacity: 0;
-  transition: opacity 240ms ease;
-}
-
-.entry.active::before {
-  opacity: 1;
-}
-
 .entry.active {
   background: rgba(181, 138, 58, 0.05);
 }
 
-/* ── entry content ─────────────────────────────────── */
-.gutter {
-  /* the left column holds the small-caps region tag */
-}
-
-.region {
-  font-family: var(--smcap);
-  font-size: 0.66rem;
-  letter-spacing: 0.28em;
-  color: var(--vellum-mute);
-  text-transform: uppercase;
-  padding-top: 6px; /* visual alignment with name baseline */
-  transition: color 240ms ease;
-}
-
-.entry.active .region {
-  color: var(--gold);
-}
-
-.entryBody {
-  /* main column */
+.entry.active::before {
+  background: var(--gold);
+  top: 0;
+  height: 100%;
+  transform: translateY(0);
+  width: 2px;
+  box-shadow: 0 0 12px rgba(181, 138, 58, 0.5);
 }
 
 .name {
   font-family: var(--serif);
   font-weight: 500;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   line-height: 1.2;
   color: var(--vellum);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-2);
 }
 
 .label {
   color: var(--vellum-dim);
-  font-style: italic;
   font-weight: 400;
-  font-size: 0.95em;
-  margin-left: 0.2em;
+  font-size: 0.9em;
 }
 
-.text {
+.body {
   font-family: var(--serif);
-  font-size: 1rem;
+  font-size: 0.98rem;
   line-height: 1.65;
   color: var(--vellum-dim);
 }
 
-.text p { margin: 0 0 var(--space-2); }
-.text p:last-child { margin-bottom: 0; }
+.body p { margin: 0 0 var(--space-2); }
+.body p:last-child { margin-bottom: 0; }
 
-.text strong {
-  color: var(--gold);
-  font-weight: 500;
-}
+.body strong { color: var(--gold); font-weight: 500; }
 
-.entry.active .text {
-  color: var(--vellum);
-}
+.entry.active .body { color: var(--vellum); }
 
-/* mobile collapses gutter into a top row */
 @media (max-width: 900px) {
-  .scrollArea {
-    margin-left: 0;
-    padding: var(--space-12) var(--space-5) var(--space-20);
-  }
-  .head { padding-left: 0; max-width: 680px; }
-  .entries { max-width: 680px; }
-}
-
-@media (max-width: 640px) {
-  .entry {
-    grid-template-columns: 1fr;
-    gap: var(--space-2);
-  }
-  .gutter { padding: 0; }
-  .region { padding-top: 0; }
-  .name { font-size: 1.35rem; }
+  .scrollArea { margin-left: 0; padding: var(--space-12) var(--space-5) var(--space-20); }
+  .almanac { max-width: 680px; }
 }
