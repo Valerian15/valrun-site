@@ -54,9 +54,6 @@ function Entry({ place, index, isActive, onActivate }) {
 
       <h3 className={styles.name}>{place.name}</h3>
       {place.label && <div className={styles.label}>{place.label}</div>}
-      <div className={styles.divider} aria-hidden="true">
-        <span className={styles.dividerMark}>◆</span>
-      </div>
       <div className={styles.body}>{place.body}</div>
     </article>
   );
