@@ -59,7 +59,6 @@ const CODA_LINKS = [
   { to: "/peoples",    label: "Peoples" },
   { to: "/faith",      label: "Faith" },
   { to: "/factions",   label: "Factions" },
-  { to: "/map",        label: "Map" },
 ];
 
 /* ── hook: fade in on scroll ────────────────────────── */
