@@ -213,7 +213,7 @@ const PLACES = [
     name: "Lylenore",
     region: "Twiland",
     label: "the eastern port",
-    x: 60, y: 90, scale: 2.6,
+    x: 59, y: 91, scale: 2.6,
     body: (
       <p>
         Twiland's eastern shoreline port, balancing Nilvelond from the far side of the forest.
