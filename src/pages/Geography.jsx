@@ -349,7 +349,7 @@ const PLACES = [
     name: "The Gyre of the Deep",
     region: "Serene Sea",
     label: "the widening whirlpool",
-    x: 70, y: 39, scale: 2.4,
+    x: 71, y: 42, scale: 2.4,
     body: (
       <p>
         A vast slow whirlpool in the east-central Serene Sea, growing measurably stronger each
