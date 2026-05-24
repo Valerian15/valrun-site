@@ -266,7 +266,7 @@ const PLACES = [
     name: "The Tomb of Time",
     region: "Sarudar",
     label: "Zelkaris observatory",
-    x: 85, y: 83, scale: 2.6,
+    x: 85, y: 82, scale: 2.6,
     body: (
       <p>
         A sandstone pyramid on the northern edge of the Golden Dunes — in truth a pre-Impact
