@@ -1,9 +1,6 @@
-/* ──────────────────────────────────────────────────────────────
-   The Geography — map-as-explorer
-   Left: sticky map that zooms/pans to each named place.
-   Right: scrolling place column. Clicking a card OR scrolling
-   it into the upper "reading band" activates it.
-   ────────────────────────────────────────────────────────────── */
+/* Geography — current/original variant. Map stage lives in
+   src/components/GeoMapStage.module.css. This file only styles the
+   right-side scrolling column. */
 
 .mapPage {
   position: relative;
@@ -11,98 +8,6 @@
   min-height: 100vh;
 }
 
-/* ── sticky map stage (left side) ──────────────────── */
-.stage {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 55%;
-  height: 100vh;
-  overflow: hidden;
-  z-index: 0;
-  background: #0a0c10;
-  border-right: 1px solid rgba(181, 138, 58, 0.18);
-  /* center the aspect-ratio'd canvas inside the stage */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* the canvas matches the map image's exact aspect ratio (2200×1650 = 4:3).
-   With width:100% / max-height:100% + aspect-ratio, the browser fits the
-   canvas to the largest box that holds the map without cropping. */
-.canvas {
-  position: relative;
-  aspect-ratio: 2200 / 1650;
-  width: 100%;
-  max-height: 100%;
-  /* container queries fallback for older browsers — most modern engines
-     respect aspect-ratio + max-height directly */
-}
-
-.mapImage {
-  position: absolute;
-  inset: 0;
-  background-size: 100% 100%;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  transition: transform 1100ms cubic-bezier(0.4, 0, 0.2, 1);
-  filter: saturate(0.96) contrast(1.04);
-}
-
-.stageOverlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at center, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 80%, rgba(0, 0, 0, 0.55) 100%),
-    linear-gradient(to right, rgba(14, 16, 20, 0.05) 0%, transparent 30%, transparent 70%, rgba(14, 16, 20, 0.5) 100%);
-}
-
-/* pulsing gold focal pin */
-.pin {
-  position: absolute;
-  width: 0;
-  height: 0;
-  transition: left 1100ms cubic-bezier(0.4, 0, 0.2, 1),
-              top 1100ms cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 2;
-}
-
-.pinDot {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 14px;
-  height: 14px;
-  margin: -7px;
-  background: var(--gold);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 4px rgba(14, 16, 20, 0.85),
-    0 0 18px rgba(181, 138, 58, 0.8);
-  z-index: 2;
-}
-
-.pinRing {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 28px;
-  height: 28px;
-  margin: -14px;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: pinPulse 2.2s ease-in-out infinite;
-}
-
-@keyframes pinPulse {
-  0%   { transform: scale(0.6); opacity: 0.9; }
-  100% { transform: scale(2.4); opacity: 0; }
-}
-
-/* ── scrolling places (right side) ─────────────────── */
 .scrollArea {
   position: relative;
   z-index: 1;
@@ -177,8 +82,6 @@
     transform 260ms ease;
 }
 
-/* a faint vertical gold rule on the inactive cards' left edge —
-   gives a sense the cards are entries on a list */
 .place::before {
   content: "";
   position: absolute;
@@ -204,7 +107,6 @@
   box-shadow: 0 0 0 2px rgba(181, 138, 58, 0.3);
 }
 
-/* ── ACTIVE state — when this is the current map focus ── */
 .place.active {
   border-color: var(--gold);
   background: rgba(28, 30, 40, 0.92);
@@ -222,7 +124,6 @@
   width: 3px;
 }
 
-/* ── card content ──────────────────────────────────── */
 .placeRegion {
   font-family: var(--smcap);
   font-size: 0.68rem;
@@ -273,15 +174,7 @@
   font-weight: 500;
 }
 
-/* ── narrow screens: map collapses above content ───── */
 @media (max-width: 900px) {
-  .stage {
-    position: sticky;
-    width: 100%;
-    height: 50vh;
-    border-right: none;
-    border-bottom: 1px solid rgba(181, 138, 58, 0.18);
-  }
   .scrollArea {
     margin-left: 0;
     padding: var(--space-12) var(--space-5) var(--space-20);
@@ -292,8 +185,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mapImage { transition: none; }
-  .pin { transition: none; }
-  .pinRing { animation: none; }
   .place { transition: none; }
 }

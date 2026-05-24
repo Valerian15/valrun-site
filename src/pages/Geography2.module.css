@@ -1,0 +1,181 @@
+/* Variant II — Refined cards */
+
+.mapPage {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+}
+
+.scrollArea {
+  position: relative;
+  z-index: 1;
+  margin-left: 55%;
+  padding: var(--space-16) var(--space-8) var(--space-24);
+  background: linear-gradient(to bottom, rgba(14, 16, 20, 0.5) 0%, rgba(14, 16, 20, 0.75) 100%);
+  min-height: 100vh;
+}
+
+.head {
+  margin: 0 auto var(--space-12);
+  max-width: 520px;
+}
+
+.eyebrow {
+  font-family: var(--smcap);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  color: var(--vellum);
+  margin: var(--space-2) 0;
+}
+
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--vellum);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.hint {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--vellum-mute);
+  font-style: italic;
+}
+
+/* ── card column ──────────────────────────────────── */
+.cards {
+  max-width: 520px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.card {
+  position: relative;
+  padding: var(--space-7) var(--space-7) var(--space-6) var(--space-8);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(181, 138, 58, 0.12);
+  border-radius: 2px;
+  cursor: pointer;
+  outline: none;
+  transition:
+    background 240ms ease,
+    border-color 240ms ease,
+    transform 240ms ease;
+}
+
+/* subtle gold left bar — thin by default, thicker on active */
+.card::before {
+  content: "";
+  position: absolute;
+  top: var(--space-5);
+  bottom: var(--space-5);
+  left: 0;
+  width: 2px;
+  background: rgba(181, 138, 58, 0.3);
+  transition:
+    background 240ms ease,
+    top 240ms ease,
+    bottom 240ms ease,
+    width 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(181, 138, 58, 0.28);
+}
+
+.card:hover::before {
+  background: rgba(181, 138, 58, 0.6);
+}
+
+.card:focus-visible {
+  border-color: var(--gold);
+}
+
+/* active state — full gold bar + soft glow + brighter bg */
+.card.active {
+  background: rgba(181, 138, 58, 0.06);
+  border-color: rgba(181, 138, 58, 0.42);
+  transform: translateX(-3px);
+}
+
+.card.active::before {
+  background: var(--gold);
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  box-shadow: 0 0 18px rgba(181, 138, 58, 0.5);
+}
+
+/* card content */
+.region {
+  font-family: var(--smcap);
+  font-size: 0.66rem;
+  letter-spacing: 0.28em;
+  color: var(--vellum-mute);
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+  transition: color 240ms ease;
+}
+
+.card.active .region {
+  color: var(--gold);
+}
+
+.name {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 1.55rem;
+  line-height: 1.15;
+  color: var(--vellum);
+  margin: 0;
+}
+
+.label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--vellum-dim);
+  margin: var(--space-1) 0 var(--space-4);
+}
+
+.body {
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--vellum);
+}
+
+.body p { margin: 0 0 var(--space-2); }
+.body p:last-child { margin-bottom: 0; }
+
+.body strong {
+  color: var(--gold);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .scrollArea {
+    margin-left: 0;
+    padding: var(--space-12) var(--space-5) var(--space-20);
+  }
+  .cards { max-width: 680px; }
+  .card { padding: var(--space-6) var(--space-6) var(--space-5) var(--space-7); }
+  .name { font-size: 1.4rem; }
+}
