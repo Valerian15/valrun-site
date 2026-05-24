@@ -333,7 +333,7 @@ const PLACES = [
     name: "The Black Bastion",
     region: "Cinder Island",
     label: "fortress of the last Zelkaris",
-    x: 39, y: 72, scale: 2.8,
+    x: 40, y: 72, scale: 2.8,
     body: (
       <p>
         Enormous fortress raised from Onyx stone by the surviving Tharalyn family. Garrisoned
