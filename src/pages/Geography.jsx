@@ -240,7 +240,7 @@ const PLACES = [
     name: "Gadh'aran",
     region: "Sarudar",
     label: "the desert hub",
-    x: 90, y: 64, scale: 2.6,
+    x: 90, y: 61, scale: 2.6,
     body: (
       <p>
         Sarudar's central caravan town and shamanic legitimacy hub, under High Shaman Zarek
