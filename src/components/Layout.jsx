@@ -2,13 +2,11 @@ import { NavLink, Outlet } from "react-router-dom";
 import styles from "./Layout.module.css";
 
 const NAV = [
-  { to: "/lore",       label: "Lore" },
   { to: "/geography",  label: "Geography" },
   { to: "/history",    label: "History" },
   { to: "/peoples",    label: "Peoples" },
   { to: "/faith",      label: "Faith" },
   { to: "/factions",   label: "Factions" },
-  { to: "/gallery",    label: "Gallery" },
 ];
 
 export default function Layout() {

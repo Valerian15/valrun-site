@@ -19,8 +19,8 @@ const CHAPTERS = [
     eyebrow: "II.",
     title: "The Architect's Breath",
     body: "Eonar drew the first breath, and that breath has not stopped — it moves still, through stone, water, flesh, and the space between stars.",
-    to: "/lore",
-    cta: "Enter the lore",
+    to: "/faith",
+    cta: "Meet the Nine",
     align: "right",
   },
   {
@@ -41,19 +41,9 @@ const CHAPTERS = [
     cta: "Meet the peoples",
     align: "right",
   },
-  {
-    img: "/hero/06-the-crack.jpg",
-    eyebrow: "V.",
-    title: "The Crack Beneath",
-    body: "The Anchor continues to crack. None who hold the pieces of the puzzle have yet spoken to one another.",
-    to: "/lore",
-    cta: "Listen for the hum",
-    align: "center",
-  },
 ];
 
 const CODA_LINKS = [
-  { to: "/lore",       label: "Lore" },
   { to: "/geography",  label: "Geography" },
   { to: "/history",    label: "History" },
   { to: "/peoples",    label: "Peoples" },

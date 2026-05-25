@@ -42,11 +42,11 @@ src/
     Page.jsx  + .module.css   # page primitives (Page, Section, NamedList, Flourish, Placeholder)
   pages/
     Home.jsx + Home.module.css  # bespoke hero + section-card grid
-    Lore.jsx, Geography.jsx, History.jsx, Peoples.jsx, Faith.jsx,
-    Factions.jsx, Language.jsx, Map.jsx, Gallery.jsx, NotFound.jsx
+    Geography.jsx, History.jsx, Peoples.jsx, Faith.jsx,
+    Factions.jsx, NotFound.jsx
 ```
 
-- **Real routes.** Each page has a URL (e.g. `/lore`, `/geography`). `App.jsx` is the only place routes are registered. Adding a page = add a `pages/X.jsx`, add a `<Route>` in `App.jsx`, and add an entry to the `NAV` array in [src/components/Layout.jsx](src/components/Layout.jsx).
+- **Real routes.** Each page has a URL (e.g. `/geography`, `/faith`). `App.jsx` is the only place routes are registered. Adding a page = add a `pages/X.jsx`, add a `<Route>` in `App.jsx`, and add an entry to the `NAV` array in [src/components/Layout.jsx](src/components/Layout.jsx).
 - **Single nav source.** The sidebar/header nav is driven by the `NAV` array in `Layout.jsx`. Keep it in sync with the routes.
 - **Page primitives.** Most pages compose `Page`, `Section`, `NamedList`, and `Flourish` from [src/components/Page.jsx](src/components/Page.jsx) rather than writing raw markup. `Page` provides the chapter eyebrow + title + italic lede + body wrapper; `Section` is a sub-section with its own small-caps eyebrow + serif heading; `NamedList` renders the bordered `<dt>/<dd>` lists used for factions, peoples, vocabularies, etc.; `Flourish` is the ornamental gold-rule break.
 - **Home is bespoke.** [src/pages/Home.jsx](src/pages/Home.jsx) does not use `Page` — it's a custom hero + a grid of section cards driven by a local `SECTIONS` array. Keep that array in sync with the real routes.
