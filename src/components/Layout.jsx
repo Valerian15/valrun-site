@@ -15,7 +15,6 @@ export default function Layout() {
       <header className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
           <NavLink to="/" className={styles.brand}>
-            <span className={styles.brandMark}>✦</span>
             <span className={styles.brandText}>Val'Run</span>
           </NavLink>
           <nav className={styles.nav}>
