@@ -1,5 +1,6 @@
 import TarotCard from "../components/TarotCard.jsx";
 import ChapterHero from "../components/ChapterHero.jsx";
+import ChapterEnd from "../components/ChapterEnd.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import { chapterFor } from "../data/chapters.js";
 import styles from "./Factions.module.css";
@@ -89,6 +90,7 @@ export default function Factions() {
         <CardSection title="Arms"              items={ARMS} />
         <CardSection title="Orders & Schools"  items={ORDERS} />
       </div>
+      <ChapterEnd current="/factions" />
     </>
   );
 }

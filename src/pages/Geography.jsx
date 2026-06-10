@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import GeoMapStage from "../components/GeoMapStage.jsx";
+import ChapterEnd from "../components/ChapterEnd.jsx";
 import { PLACES } from "../data/geography.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./Geography.module.css";
@@ -119,6 +120,8 @@ export default function Geography() {
             </section>
           ))}
         </div>
+
+        <ChapterEnd current="/geography" />
       </div>
     </div>
   );

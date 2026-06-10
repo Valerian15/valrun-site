@@ -1,0 +1,89 @@
+/* ChapterEnd — the page-turn threshold band. The whole band is one link. */
+
+.band {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36vh;
+  min-height: 36svh;
+  overflow: hidden;
+  text-align: center;
+  border-top: 1px solid rgba(181, 138, 58, 0.25);
+  border-bottom: none;
+}
+
+.band:hover {
+  border-bottom: none;
+}
+
+.bandImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.75) brightness(0.5);
+  transition: transform 1200ms ease, filter 600ms ease;
+}
+
+.band:hover .bandImg {
+  transform: scale(1.04);
+  filter: saturate(0.9) brightness(0.62);
+}
+
+.bandVignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(10, 12, 16, 0.25) 0%, rgba(10, 12, 16, 0.7) 100%),
+    linear-gradient(to bottom, var(--ink) 0%, transparent 30%, transparent 70%, var(--ink) 100%);
+  pointer-events: none;
+}
+
+.bandContent {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-12) var(--space-6);
+}
+
+.bandEyebrow {
+  font-family: var(--smcap);
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+}
+
+.bandTitle {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1.05;
+  color: var(--vellum);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.bandCue {
+  margin-top: var(--space-4);
+  font-family: var(--smcap);
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--vellum-dim);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+
+.band:hover .bandCue,
+.band:focus-visible .bandCue {
+  opacity: 1;
+  transform: none;
+}
+
+.band:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -4px;
+}

@@ -1,6 +1,7 @@
 import { PEOPLES } from "../data/peoples.js";
 import TarotCard from "../components/TarotCard.jsx";
 import ChapterHero from "../components/ChapterHero.jsx";
+import ChapterEnd from "../components/ChapterEnd.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import { chapterFor } from "../data/chapters.js";
 import styles from "./Peoples.module.css";
@@ -27,6 +28,7 @@ export default function Peoples() {
           ))}
         </div>
       </div>
+      <ChapterEnd current="/peoples" />
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { HISTORY, HISTORY_INTRO } from "../data/history.jsx";
 import ChapterHero from "../components/ChapterHero.jsx";
+import ChapterEnd from "../components/ChapterEnd.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import { chapterFor } from "../data/chapters.js";
 import styles from "./History.module.css";
@@ -116,6 +117,7 @@ export default function History() {
           ))}
         </div>
       </article>
+      <ChapterEnd current="/history" />
     </>
   );
 }
