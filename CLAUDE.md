@@ -37,19 +37,24 @@ src/
   main.jsx                    # entry; wraps <App> in <BrowserRouter>
   App.jsx                     # <Routes> only — every route renders inside <Layout>
   styles/theme.css            # design tokens (CSS custom properties), fonts, global resets
+  data/
+    chapters.js               # canonical chapter order/numbering/titles/hero art
   components/
-    Layout.jsx + .module.css  # sticky header + nav + footer; <Outlet/> for the page
-    Page.jsx  + .module.css   # page primitives (Page, Section, NamedList, Flourish, Placeholder)
+    Layout.jsx + .module.css      # sticky header + nav + footer; <Outlet/> for the page
+    ChapterHero.jsx + .module.css # full-bleed cinematic chapter opening (interior pages)
+    ChapterEnd.jsx + .module.css  # "turn the page" next-chapter band at the foot of chapters
+    TarotCard.jsx + .module.css   # flippable card used by Peoples/Faith/Factions spreads
+    GeoMapStage.jsx + .module.css # scroll-synced map stage for Geography
+    ScrollToTop.jsx               # scroll reset on route change
   pages/
-    Home.jsx + Home.module.css  # bespoke hero + section-card grid
+    Home.jsx + Home.module.css  # bespoke hero + chapter panels
     Geography.jsx, History.jsx, Peoples.jsx, Faith.jsx,
-    Factions.jsx, NotFound.jsx
+    Factions.jsx, NotFound.jsx (each with its own .module.css)
 ```
 
-- **Real routes.** Each page has a URL (e.g. `/geography`, `/faith`). `App.jsx` is the only place routes are registered. Adding a page = add a `pages/X.jsx`, add a `<Route>` in `App.jsx`, and add an entry to the `NAV` array in [src/components/Layout.jsx](src/components/Layout.jsx).
-- **Single nav source.** The sidebar/header nav is driven by the `NAV` array in `Layout.jsx`. Keep it in sync with the routes.
-- **Page primitives.** Most pages compose `Page`, `Section`, `NamedList`, and `Flourish` from [src/components/Page.jsx](src/components/Page.jsx) rather than writing raw markup. `Page` provides the chapter eyebrow + title + italic lede + body wrapper; `Section` is a sub-section with its own small-caps eyebrow + serif heading; `NamedList` renders the bordered `<dt>/<dd>` lists used for factions, peoples, vocabularies, etc.; `Flourish` is the ornamental gold-rule break.
-- **Home is bespoke.** [src/pages/Home.jsx](src/pages/Home.jsx) does not use `Page` — it's a custom hero + a grid of section cards driven by a local `SECTIONS` array. Keep that array in sync with the real routes.
+- **Real routes.** Each page has a URL (e.g. `/geography`, `/faith`). `App.jsx` is the only place routes are registered. Adding a page = add a `pages/X.jsx`, add a `<Route>` in `App.jsx`, and (for chapters) add an entry to `CHAPTERS` in [src/data/chapters.js](src/data/chapters.js).
+- **Single chapter source.** [src/data/chapters.js](src/data/chapters.js) is the canonical chapter order, numbering, titles, and hero art. The Layout `NAV`, Home's panel numerals and coda, `ChapterHero` eyebrows, and `ChapterEnd` bands all derive from it — never hardcode chapter order or numerals elsewhere.
+- **Pages are bespoke.** There are no generic page primitives — each page owns its markup and colocated CSS Module. Shared visual building blocks are the components above (`ChapterHero`, `ChapterEnd`, `TarotCard`, `GeoMapStage`, `ScrollToTop`).
 
 ## Design system
 
@@ -72,7 +77,7 @@ Reusable utility classes from the global stylesheet:
 
 ## Assets
 
-`/public` holds runtime assets referenced by absolute path (`favicon.svg`, `icons.svg`). `src/assets/` holds the only imported asset, `hero.png`, which is currently unused but kept for future hero treatments. There is no longer any 3D model or three.js scene — those were removed in the rewrite along with `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`, and `three`.
+`/public` holds runtime assets referenced by absolute path (`icons.svg`, favicons, the `/hero/*.jpg` chapter art, `/peoples` portraits, `/map.jpg`). `src/assets/` is empty/removed — all imagery lives in `/public`. There is no longer any 3D model or three.js scene — those were removed in the rewrite along with `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`, and `three`.
 
 ## What was removed (and don't re-introduce without reason)
 
