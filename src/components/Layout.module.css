@@ -133,26 +133,39 @@
 /* ── small screens ─────────────────────────────────── */
 @media (max-width: 960px) {
   .headerInner {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: var(--space-3);
+    padding-top: var(--space-3);
+    padding-bottom: var(--space-3);
+  }
+  .brand {
+    font-size: 1.25rem;
+    flex-shrink: 0;
   }
   .nav {
-    flex-wrap: wrap;
-    white-space: normal;
-    gap: var(--space-3);
-    width: 100%;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    gap: var(--space-4);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(to right, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent);
+  }
+  .nav::-webkit-scrollbar {
+    display: none;
   }
   .navLink {
     font-size: 0.72rem;
+    flex-shrink: 0;
   }
   .appCta {
     margin-left: 0;
-    align-self: flex-start;
   }
   .appCtaIcon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
 }
 
