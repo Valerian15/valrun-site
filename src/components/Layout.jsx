@@ -39,7 +39,7 @@ export default function Layout() {
             title="Enter the tabletop"
           >
             <img
-              src="/valrun-tree.png"
+              src="/valrun-tree-160.png"
               alt=""
               className={styles.appCtaIcon}
               width="36"
