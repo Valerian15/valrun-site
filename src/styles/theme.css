@@ -11,7 +11,7 @@
   --ink-line:   #2a2f3a;   /* hairline borders */
   --vellum:     #ece3cf;   /* primary text, aged ivory */
   --vellum-dim: #b6ad97;   /* secondary text */
-  --vellum-mute:#7a7461;   /* tertiary / meta */
+  --vellum-mute:#8d8672;   /* tertiary / meta — 5.3:1 on --ink */
   --oxblood:    #8a2a2a;   /* primary accent */
   --oxblood-hi: #b04a3a;   /* hover state for oxblood */
   --gold:       #b58a3a;   /* secondary accent, dull leaf gold */
