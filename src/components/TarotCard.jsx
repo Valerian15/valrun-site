@@ -44,7 +44,15 @@ export default function TarotCard({ name, description, image }) {
           <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
           <div className={styles.plate} aria-hidden="true">
             {image ? (
-              <img src={image} alt="" className={styles.plateImage} />
+              <img
+                src={image}
+                alt=""
+                className={styles.plateImage}
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="600"
+              />
             ) : (
               <span className={styles.plateMark}>{name.charAt(0)}</span>
             )}

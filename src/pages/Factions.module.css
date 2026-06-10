@@ -5,6 +5,7 @@
   position: relative;
   isolation: isolate;
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   padding: var(--space-16) var(--space-6) var(--space-24);
 }
