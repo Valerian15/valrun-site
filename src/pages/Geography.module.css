@@ -233,3 +233,16 @@
   .scrollArea { margin-left: 0; padding: var(--space-12) var(--space-5) var(--space-20); }
   .almanac { max-width: 680px; }
 }
+
+/* the real interactive element inside each entry */
+.nameButton {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.nameButton:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}

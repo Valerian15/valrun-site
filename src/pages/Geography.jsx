@@ -37,22 +37,25 @@ function Entry({ place, index, isActive, onActivate }) {
       ref={ref}
       className={`${styles.entry} ${isActive ? styles.active : ""}`}
       onClick={handleClick}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleClick();
-        }
-      }}
-      role="button"
-      tabIndex={0}
-      aria-current={isActive ? "true" : undefined}
     >
       <span className={`${styles.corner} ${styles.cornerTL}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.cornerTR}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.cornerBL}`} aria-hidden="true" />
       <span className={`${styles.corner} ${styles.cornerBR}`} aria-hidden="true" />
 
-      <h3 className={styles.name}>{place.name}</h3>
+      <h3 className={styles.name}>
+        <button
+          type="button"
+          className={styles.nameButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClick();
+          }}
+          aria-current={isActive ? "true" : undefined}
+        >
+          {place.name}
+        </button>
+      </h3>
       {place.label && <div className={styles.label}>{place.label}</div>}
       <div className={styles.body}>{place.body}</div>
     </article>

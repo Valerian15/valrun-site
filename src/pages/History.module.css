@@ -244,3 +244,16 @@
   .numeral { transition: none; }
   .marker { transition: none; }
 }
+
+/* the real interactive element inside each age entry */
+.titleButton {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.titleButton:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}

@@ -37,15 +37,6 @@ function AgeEntry({ age, index, isActive, onActivate }) {
       ref={ref}
       className={`${styles.entry} ${isActive ? styles.active : ""}`}
       onClick={handleClick}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          handleClick();
-        }
-      }}
-      role="button"
-      tabIndex={0}
-      aria-current={isActive ? "true" : undefined}
     >
       <div className={styles.numeralCell}>
         <span className={styles.numeral} aria-hidden="true">{age.roman}</span>
@@ -53,7 +44,19 @@ function AgeEntry({ age, index, isActive, onActivate }) {
       <span className={styles.marker} aria-hidden="true" />
       <div className={styles.content}>
         <div className={styles.era}>{age.era}</div>
-        <h2 className={styles.title}>{age.title}</h2>
+        <h2 className={styles.title}>
+          <button
+            type="button"
+            className={styles.titleButton}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClick();
+            }}
+            aria-current={isActive ? "true" : undefined}
+          >
+            {age.title}
+          </button>
+        </h2>
         <div className={styles.body}>{age.body}</div>
       </div>
     </article>
