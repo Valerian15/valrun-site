@@ -66,7 +66,7 @@ export default function TarotCard({ name, description, image }) {
       </div>
       <button
         type="button"
-        className={styles.flipControl}
+        className={`${styles.flipControl} ${flipped ? styles.flipControlBack : ""}`}
         onClick={toggle}
         aria-expanded={flipped}
       >
