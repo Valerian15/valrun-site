@@ -17,8 +17,9 @@ function Corners() {
  * Props:
  *   name        — visible on both faces
  *   description — visible on the back face when flipped
- *   image       — optional portrait shown inside the plate;
- *                 falls back to the first letter of name in gold */
+ *   image       — optional full-bleed art for the card face;
+ *                 without it the face shows a placeholder (faint initial)
+ *                 in the same full-bleed frame, ready to receive art. */
 export default function TarotCard({ name, description, image }) {
   const [flipped, setFlipped] = useState(false);
   const toggle = () => setFlipped((v) => !v);
@@ -26,33 +27,27 @@ export default function TarotCard({ name, description, image }) {
     <article className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
       <div className={styles.cardInner}>
         <div
-          className={`${styles.cardFace} ${image ? styles.cardFrontImage : ""}`}
+          className={`${styles.cardFace} ${styles.cardFrontImage}`}
           aria-hidden={flipped}
         >
           <Corners />
           {image ? (
-            <>
-              <img
-                src={image}
-                alt=""
-                className={styles.faceImage}
-                loading="lazy"
-                decoding="async"
-                width="600"
-                height="600"
-              />
-              <div className={styles.faceScrim} aria-hidden="true" />
-              <h2 className={`${styles.cardName} ${styles.cardNamePlate}`}>{name}</h2>
-            </>
+            <img
+              src={image}
+              alt=""
+              className={styles.faceImage}
+              loading="lazy"
+              decoding="async"
+              width="600"
+              height="600"
+            />
           ) : (
-            <>
-              <h2 className={styles.cardName}>{name}</h2>
-              <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
-              <div className={styles.plate} aria-hidden="true">
-                <span className={styles.plateMark}>{name.charAt(0)}</span>
-              </div>
-            </>
+            <div className={styles.facePlaceholder} aria-hidden="true">
+              <span className={styles.placeholderMark}>{name.charAt(0)}</span>
+            </div>
           )}
+          <div className={styles.faceScrim} aria-hidden="true" />
+          <h2 className={`${styles.cardName} ${styles.cardNamePlate}`}>{name}</h2>
           <div className={styles.flipHint} aria-hidden="true">turn the card ↻</div>
         </div>
 
