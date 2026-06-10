@@ -36,8 +36,8 @@ const CHAPTERS = [
   {
     img: "/hero/05-peoples.jpg",
     eyebrow: "IV.",
-    title: "The Eleven Kindreds",
-    body: "Six peoples are remembered in scripture. Five watch from the edges of recorded history.",
+    title: "The Twelve Kindreds",
+    body: "Six peoples are remembered in scripture. Six watch from the edges of recorded history.",
     to: "/peoples",
     cta: "Meet the peoples",
     align: "right",
