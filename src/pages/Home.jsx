@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./Home.module.css";
 
 /* ── data ───────────────────────────────────────────── */
@@ -153,6 +154,7 @@ function Coda() {
 /* ── page ───────────────────────────────────────────── */
 
 export default function Home() {
+  useDocumentMeta();
   return (
     <div className={styles.home}>
       <Frontispiece />

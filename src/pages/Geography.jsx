@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import GeoMapStage from "../components/GeoMapStage.jsx";
 import { PLACES } from "../data/geography.jsx";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./Geography.module.css";
 
 /* The Geography — an almanac of Val'Run.
@@ -59,6 +60,7 @@ function Entry({ place, index, isActive, onActivate }) {
 }
 
 export default function Geography() {
+  useDocumentMeta("The Geography");
   const [activeIndex, setActiveIndex] = useState(0);
   const focus = PLACES[activeIndex] ?? PLACES[0];
 

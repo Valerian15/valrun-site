@@ -1,4 +1,5 @@
 import TarotCard from "../components/TarotCard.jsx";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./Faith.module.css";
 
 const HERO = "/hero/03-aetherflow.jpg";
@@ -25,6 +26,7 @@ const TEMPLES = [
 ];
 
 export default function Faith() {
+  useDocumentMeta("The Faith");
   return (
     <div className={styles.tarotWrap}>
       <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />

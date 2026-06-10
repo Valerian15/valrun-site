@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { Page } from "../components/Page.jsx";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 
 export default function NotFound() {
+  useDocumentMeta("Lost in the margins");
   return (
     <Page
       eyebrow="Errata"

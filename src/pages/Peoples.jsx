@@ -1,10 +1,12 @@
 import { PEOPLES } from "../data/peoples.js";
 import TarotCard from "../components/TarotCard.jsx";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./Peoples.module.css";
 
 const HERO = "/hero/05-peoples.jpg";
 
 export default function Peoples() {
+  useDocumentMeta("The Peoples");
   return (
     <div className={styles.tarotWrap}>
       <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />

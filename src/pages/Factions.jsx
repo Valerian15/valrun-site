@@ -1,4 +1,5 @@
 import TarotCard from "../components/TarotCard.jsx";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./Factions.module.css";
 
 const HERO = "/hero/04-continent.jpg";
@@ -66,6 +67,7 @@ function CardSection({ title, items }) {
 }
 
 export default function Factions() {
+  useDocumentMeta("The Factions");
   return (
     <div className={styles.tarotWrap}>
       <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />

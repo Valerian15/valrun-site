@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { HISTORY, HISTORY_INTRO } from "../data/history.jsx";
+import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import styles from "./History.module.css";
 
 /* The History — River of Years.
@@ -60,6 +61,7 @@ function AgeEntry({ age, index, isActive, onActivate }) {
 }
 
 export default function History() {
+  useDocumentMeta("The History");
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
