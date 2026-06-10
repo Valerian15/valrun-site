@@ -15,34 +15,6 @@
   margin: 0 auto var(--space-16);
 }
 
-.eyebrow {
-  font-family: var(--smcap);
-  font-size: 0.85rem;
-  letter-spacing: 0.28em;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: var(--space-3);
-}
-
-.pageTitle {
-  font-family: var(--serif);
-  font-weight: 500;
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  line-height: 1.05;
-  color: var(--vellum);
-  margin: var(--space-2) 0;
-}
-
-.lede {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
-  line-height: 1.5;
-  color: var(--vellum);
-  max-width: 540px;
-  margin: var(--space-5) auto var(--space-3);
-}
-
 .intro {
   font-family: var(--serif);
   font-size: 1.02rem;

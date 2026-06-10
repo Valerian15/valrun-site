@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { HISTORY, HISTORY_INTRO } from "../data/history.jsx";
+import ChapterHero from "../components/ChapterHero.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
+import { chapterFor } from "../data/chapters.js";
 import styles from "./History.module.css";
 
 /* The History — River of Years.
@@ -69,29 +71,32 @@ export default function History() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <article className={styles.page}>
-      <header className={styles.head}>
-        <div className={styles.eyebrow}>Chapter III</div>
-        <h1 className={styles.pageTitle}>The History</h1>
-        <p className={styles.lede}>
-          All time in Val'Run is reckoned from a single moment of fire.
-        </p>
-        <p className={styles.intro}>{HISTORY_INTRO}</p>
-        <div className={styles.hint}>The river of years. Scroll or click any age.</div>
-      </header>
+    <>
+      <ChapterHero
+        numeral={chapterFor("/history").numeral}
+        title="The History"
+        lede="All time in Val'Run is reckoned from a single moment of fire."
+        image={chapterFor("/history").hero}
+      />
+      <article className={styles.page}>
+        <header className={styles.head}>
+          <p className={styles.intro}>{HISTORY_INTRO}</p>
+          <div className={styles.hint}>The river of years. Scroll or click any age.</div>
+        </header>
 
-      <div className={styles.timeline}>
-        <div className={styles.spine} aria-hidden="true" />
-        {HISTORY.map((age, i) => (
-          <AgeEntry
-            key={age.title}
-            age={age}
-            index={i}
-            isActive={i === activeIndex}
-            onActivate={setActiveIndex}
-          />
-        ))}
-      </div>
-    </article>
+        <div className={styles.timeline}>
+          <div className={styles.spine} aria-hidden="true" />
+          {HISTORY.map((age, i) => (
+            <AgeEntry
+              key={age.title}
+              age={age}
+              index={i}
+              isActive={i === activeIndex}
+              onActivate={setActiveIndex}
+            />
+          ))}
+        </div>
+      </article>
+    </>
   );
 }

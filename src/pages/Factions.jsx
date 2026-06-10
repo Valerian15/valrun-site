@@ -1,5 +1,7 @@
 import TarotCard from "../components/TarotCard.jsx";
+import ChapterHero from "../components/ChapterHero.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
+import { chapterFor } from "../data/chapters.js";
 import styles from "./Factions.module.css";
 
 const HERO = "/hero/04-continent.jpg";
@@ -68,25 +70,25 @@ function CardSection({ title, items }) {
 
 export default function Factions() {
   useDocumentMeta("The Factions");
+  const ch = chapterFor("/factions");
   return (
-    <div className={styles.tarotWrap}>
-      <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />
-      <div className={styles.bgOverlay} aria-hidden="true" />
+    <>
+      <ChapterHero
+        numeral={ch.numeral}
+        title={ch.title}
+        lede="Twelve hundred years after the Empire fell, Val'Run is governed not by a throne but by a web. Turn any card to read its tale."
+        image={ch.hero}
+      />
+      <div className={styles.tarotWrap}>
+        <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />
+        <div className={styles.bgOverlay} aria-hidden="true" />
 
-      <header className={styles.head}>
-        <div className={styles.eyebrow}>Chapter VI</div>
-        <h1 className={styles.title}>The Factions</h1>
-        <p className={styles.lede}>
-          Twelve hundred years after the Empire fell, Val'Run is governed not by a throne but
-          by a web. Turn any card to read its tale.
-        </p>
-      </header>
-
-      <CardSection title="Sovereign Powers" items={POWERS} />
-      <CardSection title="Guilds & Commerce" items={GUILDS} />
-      <CardSection title="The Underworld"    items={UNDERWORLD} />
-      <CardSection title="Arms"              items={ARMS} />
-      <CardSection title="Orders & Schools"  items={ORDERS} />
-    </div>
+        <CardSection title="Sovereign Powers" items={POWERS} />
+        <CardSection title="Guilds & Commerce" items={GUILDS} />
+        <CardSection title="The Underworld"    items={UNDERWORLD} />
+        <CardSection title="Arms"              items={ARMS} />
+        <CardSection title="Orders & Schools"  items={ORDERS} />
+      </div>
+    </>
   );
 }

@@ -1,5 +1,7 @@
 import TarotCard from "../components/TarotCard.jsx";
+import ChapterHero from "../components/ChapterHero.jsx";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
+import { chapterFor } from "../data/chapters.js";
 import styles from "./Faith.module.css";
 
 const HERO = "/hero/03-aetherflow.jpg";
@@ -27,18 +29,18 @@ const TEMPLES = [
 
 export default function Faith() {
   useDocumentMeta("The Faith");
+  const ch = chapterFor("/faith");
   return (
-    <div className={styles.tarotWrap}>
-      <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />
-      <div className={styles.bgOverlay} aria-hidden="true" />
-
-      <header className={styles.head}>
-        <div className={styles.eyebrow}>Chapter V</div>
-        <h1 className={styles.title}>The Faith</h1>
-        <p className={styles.lede}>
-          Three faiths, one scripture, and a silence at the heart of all three.
-        </p>
-      </header>
+    <>
+      <ChapterHero
+        numeral={ch.numeral}
+        title={ch.title}
+        lede="Three faiths, one scripture, and a silence at the heart of all three."
+        image={ch.hero}
+      />
+      <div className={styles.tarotWrap}>
+        <div className={styles.bg} style={{ backgroundImage: `url(${HERO})` }} aria-hidden="true" />
+        <div className={styles.bgOverlay} aria-hidden="true" />
 
       <section className={styles.narrative}>
         <p>
@@ -125,6 +127,7 @@ export default function Faith() {
           shamans; and the Shadow Pact's clandestine Night of Whispering Shadows.
         </p>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
