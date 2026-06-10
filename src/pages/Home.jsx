@@ -115,7 +115,7 @@ function Chapter({ img, eyebrow, title, body, to, cta, align }) {
         </div>
         <h2 className={styles.chapterTitle}>{title}</h2>
         <p className={styles.chapterBody}>{body}</p>
-        <Link to={to} className={styles.chapterLink}>
+        <Link to={to} viewTransition className={styles.chapterLink}>
           {cta} <span aria-hidden="true">→</span>
         </Link>
       </div>
@@ -136,7 +136,7 @@ function Coda() {
         <ul className={styles.codaList}>
           {CODA_LINKS.map((l) => (
             <li key={l.to}>
-              <Link to={l.to} className={styles.codaLink}>
+              <Link to={l.to} viewTransition className={styles.codaLink}>
                 {l.label}
               </Link>
             </li>

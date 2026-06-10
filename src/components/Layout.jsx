@@ -12,7 +12,7 @@ export default function Layout() {
       </a>
       <header className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
-          <NavLink to="/" className={styles.brand}>
+          <NavLink to="/" viewTransition className={styles.brand}>
             <span className={styles.brandText}>Val'Run</span>
           </NavLink>
           <nav className={styles.nav}>
@@ -20,6 +20,7 @@ export default function Layout() {
               <NavLink
                 key={item.to}
                 to={item.to}
+                viewTransition
                 className={({ isActive }) =>
                   `${styles.navLink} ${isActive ? styles.navLinkActive : ""}`
                 }

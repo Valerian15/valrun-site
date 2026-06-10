@@ -11,7 +11,7 @@ export default function NotFound() {
       lede="No page bears that name in this folio."
     >
       <p>
-        Return to the <Link to="/">frontispiece</Link>, or pick a chapter from the spine above.
+        Return to the <Link to="/" viewTransition>frontispiece</Link>, or pick a chapter from the spine above.
       </p>
     </Page>
   );
