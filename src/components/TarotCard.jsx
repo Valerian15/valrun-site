@@ -23,22 +23,9 @@ export default function TarotCard({ name, description, image }) {
   const [flipped, setFlipped] = useState(false);
   const toggle = () => setFlipped((v) => !v);
   return (
-    <article
-      className={`${styles.card} ${flipped ? styles.flipped : ""}`}
-      onClick={toggle}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          toggle();
-        }
-      }}
-      role="button"
-      tabIndex={0}
-      aria-pressed={flipped}
-      aria-label={`${name} — ${flipped ? "hide" : "reveal"} description`}
-    >
+    <article className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
       <div className={styles.cardInner}>
-        <div className={styles.cardFace}>
+        <div className={styles.cardFace} aria-hidden={flipped}>
           <Corners />
           <h2 className={styles.cardName}>{name}</h2>
           <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
@@ -60,7 +47,7 @@ export default function TarotCard({ name, description, image }) {
           <div className={styles.flipHint} aria-hidden="true">turn the card ↻</div>
         </div>
 
-        <div className={`${styles.cardFace} ${styles.cardBack}`}>
+        <div className={`${styles.cardFace} ${styles.cardBack}`} aria-hidden={!flipped}>
           <Corners />
           <h2 className={styles.cardNameBack}>{name}</h2>
           <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
@@ -68,6 +55,16 @@ export default function TarotCard({ name, description, image }) {
           <div className={styles.flipHint} aria-hidden="true">turn back ↻</div>
         </div>
       </div>
+      <button
+        type="button"
+        className={styles.flipControl}
+        onClick={toggle}
+        aria-expanded={flipped}
+      >
+        <span className="visually-hidden">
+          {flipped ? `Turn the ${name} card back` : `Turn the ${name} card to read its tale`}
+        </span>
+      </button>
     </article>
   );
 }
