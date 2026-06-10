@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import useDocumentMeta from "../hooks/useDocumentMeta.js";
+import { chapterFor, CHAPTERS as CANON } from "../data/chapters.js";
 import styles from "./Home.module.css";
 
 /* ── data ───────────────────────────────────────────── */
@@ -8,7 +9,7 @@ import styles from "./Home.module.css";
 const CHAPTERS = [
   {
     img: "/hero/02-the-breaking.jpg",
-    eyebrow: "I.",
+    eyebrow: `${chapterFor("/history").numeral}.`,
     title: "The Breaking",
     body: "A meteor struck the heart of Cinder Island in Year 0. The world has been answering ever since.",
     to: "/history",
@@ -17,7 +18,7 @@ const CHAPTERS = [
   },
   {
     img: "/hero/03-aetherflow.jpg",
-    eyebrow: "II.",
+    eyebrow: `${chapterFor("/faith").numeral}.`,
     title: "The Architect's Breath",
     body: "Eonar drew the first breath, and that breath has not stopped — it moves still, through stone, water, flesh, and the space between stars.",
     to: "/faith",
@@ -26,7 +27,7 @@ const CHAPTERS = [
   },
   {
     img: "/hero/04-continent.jpg",
-    eyebrow: "III.",
+    eyebrow: `${chapterFor("/geography").numeral}.`,
     title: "The Continent of Four Faces",
     body: "Verdure, Twiland, Sarudar, Cinder — drawn together and slowly torn apart by a single inland sea.",
     to: "/geography",
@@ -35,7 +36,7 @@ const CHAPTERS = [
   },
   {
     img: "/hero/05-peoples.jpg",
-    eyebrow: "IV.",
+    eyebrow: `${chapterFor("/peoples").numeral}.`,
     title: "The Twelve Kindreds",
     body: "Six peoples are remembered in scripture. Six watch from the edges of recorded history.",
     to: "/peoples",
@@ -44,13 +45,7 @@ const CHAPTERS = [
   },
 ];
 
-const CODA_LINKS = [
-  { to: "/geography",  label: "Geography" },
-  { to: "/history",    label: "History" },
-  { to: "/peoples",    label: "Peoples" },
-  { to: "/faith",      label: "Faith" },
-  { to: "/factions",   label: "Factions" },
-];
+const CODA_LINKS = CANON.map(({ slug, label }) => ({ to: slug, label }));
 
 /* ── hook: fade in on scroll ────────────────────────── */
 

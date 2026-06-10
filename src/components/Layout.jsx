@@ -1,13 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { CHAPTERS } from "../data/chapters.js";
 import styles from "./Layout.module.css";
 
-const NAV = [
-  { to: "/geography",  label: "Geography" },
-  { to: "/history",    label: "History" },
-  { to: "/peoples",    label: "Peoples" },
-  { to: "/faith",      label: "Faith" },
-  { to: "/factions",   label: "Factions" },
-];
+const NAV = CHAPTERS.map(({ slug, label }) => ({ to: slug, label }));
 
 export default function Layout() {
   return (
