@@ -25,25 +25,34 @@ export default function TarotCard({ name, description, image }) {
   return (
     <article className={`${styles.card} ${flipped ? styles.flipped : ""}`}>
       <div className={styles.cardInner}>
-        <div className={styles.cardFace} aria-hidden={flipped}>
+        <div
+          className={`${styles.cardFace} ${image ? styles.cardFrontImage : ""}`}
+          aria-hidden={flipped}
+        >
           <Corners />
-          <h2 className={styles.cardName}>{name}</h2>
-          <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
-          <div className={styles.plate} aria-hidden="true">
-            {image ? (
+          {image ? (
+            <>
               <img
                 src={image}
                 alt=""
-                className={styles.plateImage}
+                className={styles.faceImage}
                 loading="lazy"
                 decoding="async"
                 width="600"
                 height="600"
               />
-            ) : (
-              <span className={styles.plateMark}>{name.charAt(0)}</span>
-            )}
-          </div>
+              <div className={styles.faceScrim} aria-hidden="true" />
+              <h2 className={`${styles.cardName} ${styles.cardNamePlate}`}>{name}</h2>
+            </>
+          ) : (
+            <>
+              <h2 className={styles.cardName}>{name}</h2>
+              <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
+              <div className={styles.plate} aria-hidden="true">
+                <span className={styles.plateMark}>{name.charAt(0)}</span>
+              </div>
+            </>
+          )}
           <div className={styles.flipHint} aria-hidden="true">turn the card ↻</div>
         </div>
 
