@@ -111,7 +111,8 @@ function Chapter({ img, eyebrow, title, body, to, cta, align }) {
   const vignetteClass =
     align === "right" ? styles.vignetteRight : align === "center" ? styles.vignetteCenter : styles.vignetteLeft;
   return (
-    <section ref={ref} className={styles.chapter} style={{ backgroundImage: `url(${img})` }}>
+    <section ref={ref} className={styles.chapter}>
+      <img src={img} alt="" className={styles.chapterBg} loading="lazy" decoding="async" />
       <div className={`${styles.vignette} ${vignetteClass}`} />
       <div className={`${styles.chapterContent} ${alignClass} ${inView ? styles.visible : ""}`}>
         <div className={styles.romanWrap}>
