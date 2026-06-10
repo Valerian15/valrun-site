@@ -5,6 +5,14 @@ import useDocumentMeta from "../hooks/useDocumentMeta.js";
 import { chapterFor } from "../data/chapters.js";
 import styles from "./History.module.css";
 
+/* Backdrop art per band of ages: the Breaking for the early ages,
+ * the Crack for the middle, the present-day frontispiece for the late. */
+const ERA_BACKDROPS = [
+  { src: "/hero/02-the-breaking.jpg", upTo: 2 },
+  { src: "/hero/06-the-crack.jpg", upTo: 4 },
+  { src: "/hero/01-frontispiece.jpg", upTo: Infinity },
+];
+
 /* The History — River of Years.
  * A single vertical gold spine runs down the left of the column.
  * Each Age is a milestone beside it: huge Roman numeral hanging
@@ -70,6 +78,8 @@ export default function History() {
   useDocumentMeta("The History");
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const backdropIndex = ERA_BACKDROPS.findIndex((b) => activeIndex <= b.upTo);
+
   return (
     <>
       <ChapterHero
@@ -79,6 +89,15 @@ export default function History() {
         image={chapterFor("/history").hero}
       />
       <article className={styles.page}>
+        <div className={styles.backdrops} aria-hidden="true">
+          {ERA_BACKDROPS.map((b, i) => (
+            <div
+              key={b.src}
+              className={`${styles.backdrop} ${i === backdropIndex ? styles.backdropActive : ""}`}
+              style={{ backgroundImage: `url(${b.src})` }}
+            />
+          ))}
+        </div>
         <header className={styles.head}>
           <p className={styles.intro}>{HISTORY_INTRO}</p>
           <div className={styles.hint}>The river of years. Scroll or click any age.</div>

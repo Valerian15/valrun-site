@@ -3,6 +3,7 @@
    with a huge Roman numeral hanging in the left margin.            */
 
 .page {
+  position: relative;
   max-width: 880px;
   margin: 0 auto;
   padding: var(--space-16) var(--space-6) var(--space-24);
@@ -228,4 +229,30 @@
 .titleButton:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 4px;
+}
+
+/* fixed, dim era backdrops crossfading with the active age */
+.backdrops {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.7) brightness(0.5);
+  opacity: 0;
+  transition: opacity 1200ms ease;
+}
+
+.backdropActive {
+  opacity: 0.16;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop { transition: none; }
 }
