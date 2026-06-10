@@ -373,3 +373,19 @@
   }
   .scrollCue { animation: none; }
 }
+
+/* slow drift on chapter art — stills feel alive */
+@media (prefers-reduced-motion: no-preference) {
+  .chapterBg {
+    animation: kenburns 36s ease-in-out infinite alternate;
+  }
+  .chapter:nth-child(odd) .chapterBg {
+    animation-duration: 44s;
+    animation-direction: alternate-reverse;
+  }
+}
+
+@keyframes kenburns {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.07) translate(1%, -1%); }
+}
