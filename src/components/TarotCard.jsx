@@ -38,7 +38,7 @@ export default function TarotCard({ name, description, image }) {
       aria-label={`${name} — ${flipped ? "hide" : "reveal"} description`}
     >
       <div className={styles.cardInner}>
-        <div className={`${styles.cardFace} ${styles.cardFront}`}>
+        <div className={styles.cardFace}>
           <Corners />
           <h2 className={styles.cardName}>{name}</h2>
           <div className={styles.cardRule} aria-hidden="true"><span>◆</span></div>
