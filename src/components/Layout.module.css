@@ -155,3 +155,23 @@
     height: 32px;
   }
 }
+
+/* keyboard-only skip link — visible on focus */
+.skipLink {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  z-index: 20;
+  background: var(--ink-soft);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--smcap);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.skipLink:focus {
+  top: var(--space-2);
+}

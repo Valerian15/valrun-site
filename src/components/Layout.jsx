@@ -12,6 +12,9 @@ const NAV = [
 export default function Layout() {
   return (
     <div className={styles.shell}>
+      <a href="#main" className={styles.skipLink}>
+        Skip to content
+      </a>
       <header className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
           <NavLink to="/" className={styles.brand}>
@@ -49,7 +52,7 @@ export default function Layout() {
         </div>
       </header>
 
-      <main className={styles.main}>
+      <main id="main" className={styles.main} tabIndex={-1}>
         <Outlet />
       </main>
 

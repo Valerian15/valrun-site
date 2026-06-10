@@ -29,7 +29,8 @@ function Entry({ place, index, isActive, onActivate }) {
 
   const handleClick = () => {
     onActivate(index);
-    ref.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    ref.current?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
   };
 
   return (
