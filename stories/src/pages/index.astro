@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content'
+import Base from '../layouts/Base.astro'
+import StoryCard from '../components/StoryCard.astro'
+const ordered = (await getCollection('stories')).sort((a, b) => a.data.sortYear - b.data.sortYear)
+---
+<Base title="Chronicles of Val'Run" description="Short stories and chronicles from across the Seven Ages of Val'Run.">
+  <section class="mast">
+    <div class="container inner">
+      <p class="eyebrow">Stories of the World</p>
+      <h1 class="mt">Chronicles of Val'Run</h1>
+      <p class="sub">Dispatches, myths, and memories from across the ages.</p>
+    </div>
+  </section>
+
+  <div class="filterwrap">
+    <div class="container fbar" id="filters">
+      <div class="grp" role="group" aria-label="Filter by Age">
+        <span class="lab">Age</span>
+        <button type="button" class="pill on" data-key="era" data-val="" aria-pressed="true">All</button>
+        <button type="button" class="pill" data-key="era" data-val="third" aria-pressed="false">Third</button>
+        <button type="button" class="pill" data-key="era" data-val="fourth" aria-pressed="false">Fourth</button>
+        <button type="button" class="pill" data-key="era" data-val="fifth" aria-pressed="false">Fifth</button>
+        <button type="button" class="pill" data-key="era" data-val="sixth" aria-pressed="false">Sixth</button>
+        <button type="button" class="pill" data-key="era" data-val="seventh" aria-pressed="false">Seventh</button>
+      </div>
+      <div class="grp" role="group" aria-label="Filter by Region">
+        <span class="lab">Region</span>
+        <button type="button" class="pill on" data-key="region" data-val="" aria-pressed="true">All</button>
+        {['Verdure','Sarudar','Twiland','Cinder','Serene Sea'].map((r) =>
+          <button type="button" class="pill" data-key="region" data-val={r} aria-pressed="false">{r}</button>)}
+      </div>
+    </div>
+  </div>
+
+  <div class="container grthey">
+    <div class="grid" id="grid">
+      {ordered.map((s) => <StoryCard story={s} />)}
+    </div>
+    <p class="empty" id="empty" hidden>No stories match the current filters. <button type="button" id="clear" class="clear">Clear filters</button></p>
+  </div>
+  <p class="visually-hidden" id="status" role="status" aria-live="polite"></p>
+  <script>import '../islands/library-filter.ts'</script>
+</Base>
+<style>
+  .mast{padding:var(--space-20) 0 var(--space-16);text-align:center;border-bottom:1px solid var(--ink-line)}
+  .inner{display:flex;flex-direction:column;align-items:center;gap:var(--space-3)}
+  .mt{font-size:clamp(2.8rem,6vw,4.4rem)} .sub{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--vellum-dim);max-width:420px;margin:0}
+  .filterwrap{position:sticky;top:var(--header-h);z-index:9;background:rgba(13,15,19,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--ink-line)}
+  .fbar{display:flex;flex-direction:column;gap:var(--space-3);padding:var(--space-4) var(--space-6)}
+  .grp{display:flex;align-items:center;flex-wrap:wrap;gap:var(--space-2)}
+  .lab{font-family:var(--smcap);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--vellum-mute);min-width:56px}
+  .pill{font-family:var(--smcap);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--vellum-dim);background:transparent;border:1px solid var(--ink-line);border-radius:2px;padding:4px 10px;cursor:pointer;transition:color .12s,border-color .12s,background .12s}
+  .pill:hover{color:var(--vellum);border-color:var(--vellum-mute)}
+  .pill.on{color:var(--gold);border-color:var(--gold);background:rgba(195,154,70,.1)}
+  .grthey{padding:var(--space-12) var(--space-6) var(--space-20)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8) var(--space-6)}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .empty{text-align:center;padding:var(--space-20) 0;color:var(--vellum-mute);font-style:italic}
+  .clear{font-family:var(--smcap);text-transform:uppercase;letter-spacing:.14em;font-size:.75rem;color:var(--gold);background:transparent;border:1px solid var(--gold);border-radius:2px;padding:6px 18px;margin-left:8px;cursor:pointer}
+</style>

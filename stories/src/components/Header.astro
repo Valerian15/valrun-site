@@ -1,0 +1,43 @@
+---
+import { HUB, FAMILY, isExternal } from '../lib/sites'
+---
+<header class="hdr">
+  <div class="container inner">
+    <span class="brand">
+      <a href={HUB.url} class="bhub" rel="noopener">Val'Run</a>
+      <span class="sep" aria-hidden="true">·</span>
+      <a href="/" class="sec">Chronicles</a>
+    </span>
+    <nav class="fam" aria-label="Val'Run sites">
+      {FAMILY.map((s, i) => (
+        <Fragment>
+          {i > 0 && <span class="navsep" aria-hidden="true">·</span>}
+          {s.current
+            ? <span class="navlink current" aria-current="page">{s.label}</span>
+            : <a class="navlink" href={s.url} rel={isExternal(s.url) ? 'noopener' : undefined}>{s.label}</a>}
+        </Fragment>
+      ))}
+    </nav>
+  </div>
+</header>
+<style>
+  .hdr{position:sticky;top:0;z-index:10;height:var(--header-h);display:flex;align-items:center;
+    background:rgba(13,15,19,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-line)}
+  .inner{display:flex;justify-content:space-between;align-items:center;width:100%;gap:var(--space-6)}
+  .brand{font-family:var(--serif);font-size:1.4rem;font-weight:600;letter-spacing:.02em;display:inline-flex;gap:var(--space-2);align-items:baseline}
+  .bhub{color:var(--vellum);border:none}
+  .bhub:hover{color:var(--gold);border:none}
+  .sep{color:var(--vellum-mute);font-weight:400}
+  .sec{color:var(--gold);font-style:italic;font-weight:500;border:none}
+  .sec:hover{color:var(--gold-hi);border:none}
+  .fam{display:flex;align-items:center;gap:var(--space-4)}
+  .navlink{font-family:var(--smcap);text-transform:uppercase;letter-spacing:.13em;font-size:.74rem;color:var(--vellum-dim);border:none;white-space:nowrap}
+  .navlink:hover{color:var(--vellum);border:none}
+  .navlink.current{color:var(--gold);cursor:default}
+  .navsep{color:var(--vellum-mute);opacity:.55;font-size:.7rem}
+  @media(max-width:600px){
+    .brand{font-size:1.15rem}
+    .fam{gap:var(--space-3)}
+    .navlink.current{display:none} /* redundant with the brand on small screens */
+  }
+</style>

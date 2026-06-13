@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string
+  description: string
+  ogImage?: string          // absolute or site-relative path
+  type?: 'website' | 'article'
+  jsonLd?: Record<string, unknown>
+}
+const { title, description, ogImage, type = 'website', jsonLd } = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site).href
+const img = ogImage ? new URL(ogImage, Astro.site).href : undefined
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="alternate" type="application/rss+xml" title="Chronicles of Val'Run" href={new URL('/rss.xml', Astro.site).href} />
+<meta name="theme-color" content="#0d0f13" />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+{img && <meta property="og:image" content={img} />}
+<meta name="twitter:card" content={img ? 'summary_large_image' : 'summary'} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{img && <meta name="twitter:image" content={img} />}
+{jsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}

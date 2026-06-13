@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets'
+interface Props { cover?: ImageMetadata; alt: string; title: string; age: string }
+const { cover, alt, title, age } = Astro.props
+const grad: Record<string, string> = {
+  third:'linear-gradient(160deg,#241b13,#0c1418)', fourth:'linear-gradient(160deg,#2a1a0a,#12100a)',
+  fifth:'linear-gradient(160deg,#1a1622,#0e1320)', sixth:'linear-gradient(160deg,#1f1008,#10140f)',
+  seventh:'linear-gradient(160deg,#0b0e16,#07090d)',
+}
+---
+<div class="cov">
+  {cover
+    ? <Image src={cover} alt={alt} widths={[320, 640, 960]} sizes="(max-width:560px) 100vw, 360px" class="art" />
+    : <div class="ph" style={`background:${grad[age] ?? grad.seventh}`} aria-hidden="true"><span>{title.charAt(0)}</span></div>}
+  <div class="vig" aria-hidden="true"></div>
+</div>
+<style>
+  .cov{position:relative;aspect-ratio:3/4;overflow:hidden}
+  .art{width:100%;height:100%;object-fit:cover;display:block}
+  .ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .ph span{font-family:var(--serif);font-size:5rem;font-weight:600;color:rgba(195,154,70,.28)}
+  .vig{position:absolute;inset:0;box-shadow:inset 0 0 60px rgba(0,0,0,.5);background:radial-gradient(120% 80% at 50% 20%,transparent 45%,rgba(0,0,0,.4))}
+</style>

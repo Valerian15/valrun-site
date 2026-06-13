@@ -1,0 +1,38 @@
+---
+import '../styles/theme.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import Seo from '../components/Seo.astro'
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+  type?: 'website' | 'article'
+  jsonLd?: Record<string, unknown>
+}
+const { title, description, ogImage, type, jsonLd } = Astro.props
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=IM+Fell+English+SC&display=swap" rel="stylesheet" />
+    <Seo title={title} description={description} ogImage={ogImage} type={type} jsonLd={jsonLd} />
+  </head>
+  <body>
+    <a href="#main" class="skip">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1"><slot /></main>
+    <Footer />
+    <style>
+      body{display:flex;flex-direction:column;min-height:100svh}
+      main{flex:1}
+      .skip{position:absolute;top:-100%;left:var(--space-4);z-index:20;background:var(--ink-soft);color:var(--gold);border:1px solid var(--gold);padding:var(--space-2) var(--space-4);font-family:var(--smcap);text-transform:uppercase;letter-spacing:.12em;font-size:.8rem}
+      .skip:focus{top:var(--space-2)}
+    </style>
+  </body>
+</html>

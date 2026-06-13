@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://stories.valrun.org/sitemap-index.xml

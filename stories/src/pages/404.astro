@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro'
+---
+<Base title="Page Not Found — Chronicles of Val'Run" description="This story has not been written yet.">
+  <div class="container nf">
+    <p class="eyebrow">404</p>
+    <h1>Page Not Found</h1>
+    <p class="sub">This story has not been written yet — or perhaps it never was.</p>
+    <a href="/" class="back">Return to the library</a>
+  </div>
+</Base>
+<style>
+  .nf{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .sub{font-style:italic;color:var(--vellum-mute);margin-bottom:var(--space-8)}
+  .back{font-family:var(--smcap);text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;color:var(--gold);border:1px solid var(--gold);border-radius:2px;padding:8px 24px}
+  .back:hover{background:rgba(195,154,70,.1)}
+</style>
