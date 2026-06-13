@@ -1,2 +1,0 @@
-# SPA fallback: serve index.html for client-side routes (real files take precedence)
-/*  /index.html  200
