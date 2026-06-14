@@ -80,39 +80,7 @@
 }
 
 /* ── chronicles CTA ──────────────────────────────────── */
-.storiesCta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  border: 1px solid var(--ink-line);
-  border-radius: 2px;
-  padding: 5px 10px;
-  flex-shrink: 0;
-  transition: border-color 160ms ease, color 160ms ease, background 160ms ease;
-  text-decoration: none;
-  color: var(--vellum-dim);
-}
-.storiesCta:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(181, 138, 58, 0.07);
-  border-bottom: 1px solid var(--gold);
-}
-
-.storiesCtaIcon {
-  font-size: 0.9rem;
-  line-height: 1;
-}
-
-.storiesCtaLabel {
-  font-family: var(--smcap);
-  font-size: 0.68rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-/* ── tabletop app CTA (top-right corner of header) ─── */
+/* ── tree button → Val'Run portal (top-right corner of header) ─── */
 .appCta {
   display: inline-flex;
   align-items: center;

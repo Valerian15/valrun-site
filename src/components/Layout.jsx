@@ -12,9 +12,6 @@ export default function Layout() {
       </a>
       <header className={styles.header}>
         <div className={`container ${styles.headerInner}`}>
-          <NavLink to="/" viewTransition className={styles.brand}>
-            <span className={styles.brandText}>Val'Run</span>
-          </NavLink>
           <nav className={styles.nav}>
             {NAV.map((item) => (
               <NavLink
@@ -29,24 +26,12 @@ export default function Layout() {
               </NavLink>
             ))}
           </nav>
+          {/* tree button → the Val'Run portal (hub). No direct links to sibling sites. */}
           <a
-            href="https://stories.valrun.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.storiesCta}
-            aria-label="Read chronicles (stories.valrun.org)"
-            title="Chronicles of Val'Run"
-          >
-            <span className={styles.storiesCtaIcon} aria-hidden="true">📖</span>
-            <span className={styles.storiesCtaLabel}>Chronicles</span>
-          </a>
-          <a
-            href="https://app.valrun.org"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="https://valrun.org"
             className={styles.appCta}
-            aria-label="Enter the tabletop (app.valrun.org)"
-            title="Enter the tabletop"
+            aria-label="Back to the Val'Run portal (valrun.org)"
+            title="Val'Run"
           >
             <img
               src="/valrun-tree-160.png"
