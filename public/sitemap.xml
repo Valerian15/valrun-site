@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://valrun.org/</loc><lastmod>2026-06-10</lastmod></url>
-  <url><loc>https://valrun.org/geography</loc><lastmod>2026-06-10</lastmod></url>
-  <url><loc>https://valrun.org/history</loc><lastmod>2026-06-10</lastmod></url>
-  <url><loc>https://valrun.org/peoples</loc><lastmod>2026-06-10</lastmod></url>
-  <url><loc>https://valrun.org/faith</loc><lastmod>2026-06-10</lastmod></url>
-  <url><loc>https://valrun.org/factions</loc><lastmod>2026-06-10</lastmod></url>
+  <url><loc>https://codex.valrun.org/</loc><lastmod>2026-06-10</lastmod></url>
+  <url><loc>https://codex.valrun.org/geography</loc><lastmod>2026-06-10</lastmod></url>
+  <url><loc>https://codex.valrun.org/history</loc><lastmod>2026-06-10</lastmod></url>
+  <url><loc>https://codex.valrun.org/peoples</loc><lastmod>2026-06-10</lastmod></url>
+  <url><loc>https://codex.valrun.org/faith</loc><lastmod>2026-06-10</lastmod></url>
+  <url><loc>https://codex.valrun.org/factions</loc><lastmod>2026-06-10</lastmod></url>
 </urlset>

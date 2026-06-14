@@ -53,4 +53,4 @@ Disallow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://valrun.org/sitemap.xml
+Sitemap: https://codex.valrun.org/sitemap.xml

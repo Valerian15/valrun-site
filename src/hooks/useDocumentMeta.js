@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const SITE = "Val'Run";
-const ORIGIN = "https://valrun.org";
+const ORIGIN = "https://codex.valrun.org";
 
 /* Sets the document title ("<title> — Val'Run") and keeps a canonical
  * <link> in sync with the current route. Pass no title for the home page. */
