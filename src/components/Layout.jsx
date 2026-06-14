@@ -30,6 +30,17 @@ export default function Layout() {
             ))}
           </nav>
           <a
+            href="https://stories.valrun.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.storiesCta}
+            aria-label="Read chronicles (stories.valrun.org)"
+            title="Chronicles of Val'Run"
+          >
+            <span className={styles.storiesCtaIcon} aria-hidden="true">📖</span>
+            <span className={styles.storiesCtaLabel}>Chronicles</span>
+          </a>
+          <a
             href="https://app.valrun.org"
             target="_blank"
             rel="noopener noreferrer"
